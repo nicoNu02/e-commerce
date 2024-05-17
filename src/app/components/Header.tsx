@@ -13,7 +13,9 @@ const Header = () => {
         <Link href={"/productos"}>
           <p>productos</p>
         </Link>
-        <p>categorias</p>
+        <Link href={"/categorias"}>
+          <p>categorias</p>
+        </Link>
       </div>
       <div className=" lg:hidden">
         <Menu />

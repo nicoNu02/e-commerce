@@ -8,7 +8,7 @@ export default function ProductPage({
   searchParams,
 }: {
   params: { productId: string };
-  searchParams: { img?: string };
+  searchParams: { img?: string; modal?: string };
 }) {
   const product = PRODUCTS[Number(params.productId)];
   const queryParams = searchParams;
@@ -28,7 +28,10 @@ export default function ProductPage({
         <div className="flex">
           {product.src.map((it, i) => {
             return (
-              <Link key={i} href={`/product/${params.productId}?img=${i}`}>
+              <Link
+                key={i}
+                href={`/product/${params.productId}?img=${i}&modal=open`}
+              >
                 <Image src={it} alt={product.desc} width={50} />
               </Link>
             );

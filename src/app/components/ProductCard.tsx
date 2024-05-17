@@ -30,7 +30,7 @@ const productCard = ({
       </p>
 
       <Link
-        href={`product/${idx}?modal=open`}
+        href={`product/${idx}?img=${idx}modal=open`}
         className="bg-black rounded-2xl text-white w-1/2 h-8 flex items-center justify-center"
       >
         Comprar

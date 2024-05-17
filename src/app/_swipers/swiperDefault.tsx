@@ -47,7 +47,7 @@ export default function SwiperDefault() {
           const name = key.name;
           const imageSrc = key.src[0];
           const imageAlt = key.desc;
-          const idx = i.toString();
+          const idx = key.id.toString();
           return (
             <SwiperSlide key={i} className="flex">
               <div className="flex flex-col align-center justify-center w-full h-full border-solid border-2 rounded-xl">

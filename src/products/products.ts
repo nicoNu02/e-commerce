@@ -7,28 +7,28 @@ import pincelDifum from "../assets/productsImages/pincelDifumin1.jpg";
 
 export const PRODUCTS = [
   {
-    id: 1,
+    id: 0,
     name: "cepillo de pestanas",
     desc: "cepillo para peinar las pestanas",
     src: [cepImage],
     color: ["white", "black", "sky-500"],
   },
   {
-    id: 2,
+    id: 1,
     name: "guantes de nitrilo",
     desc: "guantes negros de nitrilo",
     src: [guantesNitrilo1, guantesNitrilo2],
     color: ["white", "black", "sky-500"],
   },
   {
-    id: 3,
+    id: 2,
     name: "perfilador de cejas",
     desc: "perfilador de cejas de varios colores",
     src: [perfiladorImage, perfiladorImage2],
     color: ["white", "black", "sky-500"],
   },
   {
-    id: 4,
+    id: 3,
     name: "pincel difuminador",
     desc: "pincel difuminador",
     src: [pincelDifum],

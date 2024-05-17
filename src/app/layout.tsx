@@ -20,6 +20,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={mont.className}>
+        <SpeedInsights />
         <LayoutDefault>
           {children}
           {modals}

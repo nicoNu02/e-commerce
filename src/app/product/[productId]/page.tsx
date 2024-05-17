@@ -7,7 +7,7 @@ export default function ProductPage({
 }: {
   params: { productId: string };
 }) {
-  const product = PRODUCTS[params.productId];
+  const product = PRODUCTS[Number(params.productId)];
   return (
     <>
       <div className="h-1/2">

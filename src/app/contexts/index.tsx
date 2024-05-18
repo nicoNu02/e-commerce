@@ -6,7 +6,12 @@ interface Cart {
   count: number;
   color: string;
 }
-const AppContext = createContext();
+interface AppContextValue {
+  cart: Cart[];
+  setCart: React.Dispatch<React.SetStateAction<Cart[]>>;
+  handleAddToCart: (product: Cart) => void;
+}
+const AppContext = createContext<AppContextValue | undefined>(undefined);
 const initialCart: Cart = { id: -1, count: -1, color: "white" };
 
 export default function AppContextProvider({
@@ -47,5 +52,9 @@ export default function AppContextProvider({
 }
 
 export function useAppContext() {
-  return useContext(AppContext);
+  const context = useContext(AppContext);
+  if (!context) {
+    throw new Error("useAppContext must be used within an AppContextProvider");
+  }
+  return context;
 }

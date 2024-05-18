@@ -42,7 +42,7 @@ export default function ProductPage({
         <h2 className="text-2xl font-bold">{product.name}</h2>
         <div className="flex">
           {product.color.map((color, i) => {
-            return <ButtonColor key={i} col={color} idx={i} />;
+            return <ButtonColor key={i} col={color} />;
           })}
         </div>
         <AddItemCounter />

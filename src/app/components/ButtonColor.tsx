@@ -3,11 +3,11 @@
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 
-const ButtonColor = ({ col, idx }) => {
+const ButtonColor = ({ col }: { col: string }) => {
   const pathname = usePathname();
   const params = useSearchParams();
   const { replace } = useRouter();
-  const handleColorChange = (col) => {
+  const handleColorChange = (col: string) => {
     const searchParams = new URLSearchParams(params);
     if (col) {
       searchParams.set("color", col);

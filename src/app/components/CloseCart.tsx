@@ -11,7 +11,7 @@ const CloseCart = () => {
   const handleClick = () => {
     const searchParams = new URLSearchParams(params);
     searchParams.delete("cart");
-    replace(`${path}?${searchParams.toString()}`);
+    replace("/");
   };
   return (
     <button onClick={handleClick} className="mb-4 font-bold text-xl text-white">

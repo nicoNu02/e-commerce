@@ -1,3 +1,3 @@
 export default function Productos() {
-  return <div>page</div>;
+  return <div className="text-[16rem] font-bold">Coco puto</div>;
 }

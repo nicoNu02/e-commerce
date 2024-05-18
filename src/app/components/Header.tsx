@@ -23,9 +23,6 @@ const Header = () => {
       <div className="lg:hidden">
         <Menu />
       </div>
-      <Link href={"/"}>
-        <h1>Gift Regaleria</h1>
-      </Link>
       <div className="flex gap-4">
         <span>
           <Image src={search} alt="search-icon" unoptimized />

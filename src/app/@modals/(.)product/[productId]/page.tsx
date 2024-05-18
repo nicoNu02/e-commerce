@@ -10,7 +10,7 @@ export default function ProductPage({
   searchParams,
 }: {
   params: { productId: string };
-  searchParams: { img?: string; modal?: string };
+  searchParams: { img?: string; modal?: string; cart?: string };
   children: React.ReactNode;
 }) {
   const product = PRODUCTS[Number(params.productId)];

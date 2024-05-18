@@ -3,7 +3,14 @@ import { usePathname } from "next/navigation";
 import CartBody from "../components/CartBody";
 import CloseCart from "../components/CloseCart";
 
-export default function CartPage({ searchParams }) {
+export default function CartPage({
+  searchParams,
+}: {
+  searchParams: {
+    cart: string;
+    modal: string;
+  };
+}) {
   const path = usePathname();
   const visible =
     searchParams.cart === "open" &&

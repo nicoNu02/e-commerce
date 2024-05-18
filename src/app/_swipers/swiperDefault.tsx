@@ -52,10 +52,7 @@ export default function SwiperDefault() {
             slidesPerView: 4,
           },
         }}
-        navigation={{
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        }}
+        navigation
       >
         {PRODUCTS.map((key, i) => {
           const name = key.name;

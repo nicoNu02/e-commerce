@@ -18,7 +18,9 @@ const ButtonColor = ({ col }: { col: string }) => {
   };
   return (
     <button
-      className={`bg-${col} w-6 h-6 rounded-full border-2`}
+      className={`bg-${col} w-6 h-6 rounded-full border-2 ${
+        col == params.get("color") && "border-fuchsia-600"
+      }`}
       onClick={() => handleColorChange(col)}
     ></button>
   );

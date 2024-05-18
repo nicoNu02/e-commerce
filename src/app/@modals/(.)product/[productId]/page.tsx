@@ -11,7 +11,6 @@ export default function ProductPage({
 }: {
   params: { productId: string };
   searchParams: { img?: string; modal?: string; cart?: string };
-  children: React.ReactNode;
 }) {
   const product = PRODUCTS[Number(params.productId)];
   const queryParams = searchParams;

@@ -16,7 +16,6 @@ export default function ProductPage({
   const product = PRODUCTS[Number(params.productId)];
   const queryParams = searchParams;
   const actualImage = Number(queryParams?.img) || 0;
-  console.log(params);
   return (
     <Modal>
       <Link href={"/"} className="w-full h-screen fixed top-0 left-0 z-10" />

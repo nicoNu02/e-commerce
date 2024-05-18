@@ -16,7 +16,7 @@ export default function SwiperDefault() {
   const params = useSearchParams();
   const { replace } = useRouter();
 
-  const handleClick = (idx) => {
+  const handleClick = (idx: number) => {
     const searchParams = new URLSearchParams(params);
     searchParams.delete("cart");
     searchParams.set("modal", "open");
@@ -62,7 +62,6 @@ export default function SwiperDefault() {
           const imageSrc = key.src[0];
           const imageAlt = key.desc;
           const idx = key.id;
-          console.log(idx);
           return (
             <SwiperSlide key={i} className="flex">
               <div className="flex flex-col items-center justify-center w-full h-full border-solid border-2 rounded-xl">
@@ -70,7 +69,7 @@ export default function SwiperDefault() {
                   src={imageSrc}
                   alt={imageAlt}
                   name={name}
-                  idx={idx}
+                  idx={idx.toString()}
                   price="$00"
                 />
                 <button

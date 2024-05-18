@@ -5,6 +5,7 @@ import { useAppContext } from "../contexts";
 import { useState } from "react";
 
 const ButtonSubmit = ({ productId }: { productId: number }) => {
+  //@ts-ignore
   const { handleAddToCart, cart } = useAppContext();
   const [ok, setOk] = useState<boolean | null>();
   const params = useSearchParams();

@@ -16,10 +16,8 @@ export default function AppContextProvider({
 }) {
   useEffect(() => {
     // Load data from local storage on component mount
-    console.log("asdasd");
     const savedData = localStorage.getItem("myData");
     if (savedData) {
-      console.log("qweqwe");
       setCart(JSON.parse(savedData));
     }
   }, []);

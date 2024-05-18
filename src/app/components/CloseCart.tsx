@@ -14,7 +14,10 @@ const CloseCart = () => {
     replace("/");
   };
   return (
-    <button onClick={handleClick} className="mb-4 font-bold text-xl text-white">
+    <button
+      onClick={handleClick}
+      className="mb-4 font-bold text-xl text-white touch-auto"
+    >
       X
     </button>
   );

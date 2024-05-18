@@ -1,6 +1,5 @@
 "use client";
 import { usePathname } from "next/navigation";
-import Header from "../components/Header";
 
 export default function LayoutDefault({
   children,
@@ -10,8 +9,8 @@ export default function LayoutDefault({
   const pathname = usePathname();
   return pathname !== "/checkout" ? (
     <div className="flex flex-col">
-      <section>{children}</section>
-      <footer className="pt-4"></footer>
+      <section className="relative overflow-hidden">{children}</section>
+      <footer className="pt-4">asdas</footer>
     </div>
   ) : (
     <div>{children}</div>

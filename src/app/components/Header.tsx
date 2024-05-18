@@ -1,23 +1,26 @@
 import Image from "next/image";
-import cart from "../../assets/cartIcon.svg";
+
 import search from "../../assets/searchIcon.svg";
 import profile from "../../assets/profileIcon.svg";
 import Link from "next/link";
 import Menu from "./Menu";
+import CartIcon from "./CartIcon";
 
 const Header = () => {
   return (
     <header className="flex justify-between items-center p-8 h-10 border-b-2">
-      <div className="hidden lg:flex justify-between">
-        <p>inicio</p>
-        <Link href={"/productos"}>
-          <p>productos</p>
+      <div className="hidden lg:flex justify-between gap-4 font-bold text-lg ">
+        <Link href={"/"} className="hover:bg-black">
+          Inicio
         </Link>
-        <Link href={"/categorias"}>
-          <p>categorias</p>
+        <Link href={"/productos"} className="hover:bg-black">
+          Productos
+        </Link>
+        <Link href={"/categorias"} className="hover:bg-black">
+          Categorías
         </Link>
       </div>
-      <div className=" lg:hidden">
+      <div className="lg:hidden">
         <Menu />
       </div>
       <Link href={"/"}>
@@ -27,9 +30,7 @@ const Header = () => {
         <span>
           <Image src={search} alt="search-icon" unoptimized />
         </span>
-        <span>
-          <Image src={cart} alt="cart-icon" unoptimized />
-        </span>
+        <CartIcon />
         <span>
           <Image src={profile} alt="profile-icon" unoptimized />
         </span>

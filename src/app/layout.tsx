@@ -4,6 +4,7 @@ import { Montserrat } from "next/font/google";
 const mont = Montserrat({ subsets: ["latin"] });
 import LayoutDefault from "./_layouts/layoutDefault";
 import "./globals.css";
+import AppContextProvider from "./contexts";
 
 export const metadata: Metadata = {
   title: "E-commerce",
@@ -13,18 +14,23 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
   modals,
+  cart,
 }: {
   children: React.ReactNode;
   modals: React.ReactNode;
+  cart: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body className={mont.className}>
         <SpeedInsights />
-        <LayoutDefault>
-          {children}
-          {modals}
-        </LayoutDefault>
+        <AppContextProvider>
+          <LayoutDefault>
+            {children}
+            {modals}
+            {cart}
+          </LayoutDefault>
+        </AppContextProvider>
       </body>
     </html>
   );

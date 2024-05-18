@@ -11,7 +11,7 @@ type MenuItem = {
 };
 const Menu = () => {
   const [openMenu, setOpenMenu] = useState(false);
-  const [isMenuVisible, setIsMenuVisible] = useState(false);
+
   const paths: MenuItem[] = [
     { title: "Inicio", link: "/" },
     { title: "Productos", link: "/productos" },
@@ -20,7 +20,6 @@ const Menu = () => {
   const pathname = usePathname();
   const handleClick = () => {
     setOpenMenu(!openMenu);
-    setIsMenuVisible(!isMenuVisible);
   };
 
   return (

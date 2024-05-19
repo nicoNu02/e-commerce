@@ -11,5 +11,5 @@ export default async function prismaExample() {
   });
 
   const users = await prisma.user.findMany();
-  return users;
+  return <>{users}</>;
 }

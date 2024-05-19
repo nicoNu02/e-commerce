@@ -7,6 +7,7 @@ export default async function prismaExample() {
     data: {
       name: "Elliott",
       email: "xelliottx@example-user.com",
+      image: "asdasd",
     },
   });
 

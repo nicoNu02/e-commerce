@@ -18,3 +18,4 @@ model User {
   image     String
   createdAt DateTime @default(now())
 }
+ 

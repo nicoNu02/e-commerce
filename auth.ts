@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import credentials from "next-auth/providers/credentials";
-import { comparePassword } from "@/utils/encryption";
+import { compareHashedPassword } from "@/utils/encryption";
 
 import prisma from "@/libs/db";
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -31,7 +31,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         });
         if (!userFound) return null;
         if (credentials.username !== userFound.name) return null;
-        const comparedPassword = await comparePassword(
+        const comparedPassword = await compareHashedPassword(
           // @ts-ignore
           credentials.password,
           userFound.password

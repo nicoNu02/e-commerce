@@ -4,8 +4,15 @@ import Loading from "./components/loading";
 import Header from "./components/Header";
 import Shipping from "./components/Shipping";
 import CartModal from "./components/CartModal";
-
-export default async function Home({ searchParams }) {
+import { UrlWithStringQuery } from "url";
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: {
+    cart: string;
+    modal: string;
+  };
+}) {
   return (
     <Suspense fallback={<Loading />}>
       <Header />

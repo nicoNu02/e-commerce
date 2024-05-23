@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 import search from "../../assets/searchIcon.svg";
-import profile from "../../assets/profileIcon.svg";
 import Link from "next/link";
 import Menu from "./Menu";
 import CartIcon from "./CartIcon";
@@ -25,11 +24,23 @@ const Header = () => {
       </div>
       <div className="flex gap-4">
         <span>
-          <Image src={search} alt="search-icon" unoptimized />
+          <Image
+            src="https://u8v8yhe8bp8fkg64.public.blob.vercel-storage.com/searchIcon-ysvRqR1w71dKnOIWDdVE1T2xtOFdBH.svg"
+            alt="search-icon"
+            width={19}
+            height={19}
+            unoptimized
+          />
         </span>
         <CartIcon />
         <span>
-          <Image src={profile} alt="profile-icon" unoptimized />
+          <Image
+            src="https://u8v8yhe8bp8fkg64.public.blob.vercel-storage.com/profileIcon-rw0ZlWfuAo8nGBvKAaS2Bfh7EzpL4l.svg"
+            alt="profile-icon"
+            width={20}
+            height={20}
+            unoptimized
+          />
         </span>
       </div>
     </header>

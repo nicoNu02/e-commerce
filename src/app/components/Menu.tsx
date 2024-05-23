@@ -31,8 +31,8 @@ const Menu = () => {
         <div
           className={
             openMenu
-              ? "relative visible opacity-100 transition ease-in delay-50 bg-black text-white z-50 w-full p-4"
-              : " relative opacity-0 translate-y-[-100%] transition ease-in delay-50 bg-black text-white z-50 w-full p-4"
+              ? "relative visible opacity-100 transition ease-in delay-50 bg-[#FFACED] text-white z-50 w-full p-4"
+              : " relative opacity-0 translate-y-[-100%] transition ease-in delay-50 bg-[#FFACED] text-white z-50 w-full p-4"
           }
         >
           {paths.map((el, i) => {
@@ -42,8 +42,8 @@ const Menu = () => {
                 <p
                   className={
                     pathname == link
-                      ? "border-b-2 transition ease-in delay-50 px-4"
-                      : "px-4"
+                      ? "border-b-2 border-black transition ease-in delay-50 px-4 text-black font-bold"
+                      : "px-4 text-black font-bold"
                   }
                 >
                   {title}

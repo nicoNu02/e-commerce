@@ -21,6 +21,15 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/app/api/auth/register/route.ts",
+    "src/libs/db.js",
+    "src/app/api/auth/[...nextauth]/route.ts",
+    "auth.config.js"
+  ],
   "exclude": ["node_modules"]
 }

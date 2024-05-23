@@ -14,11 +14,9 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
   modals,
-  cart,
 }: {
   children: React.ReactNode;
   modals: React.ReactNode;
-  cart: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -28,7 +26,6 @@ export default async function RootLayout({
           <LayoutDefault>
             {children}
             {modals}
-            {cart}
           </LayoutDefault>
         </AppContextProvider>
       </body>

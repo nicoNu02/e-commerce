@@ -13,8 +13,8 @@ export default function CartPage({
 }) {
   const path = usePathname();
   const visible =
-    searchParams.cart === "open" &&
-    searchParams.modal != "open" &&
+    searchParams?.cart === "open" &&
+    searchParams?.modal != "open" &&
     !path.includes("/product/");
   return (
     <div

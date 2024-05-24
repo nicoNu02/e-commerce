@@ -23,9 +23,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           placeholder: "*****",
         },
       },
+      //@ts-ignore
       authorize: async (credentials) => {
         const userFound = await prisma.user.findUnique({
           where: {
+            //@ts-ignore
             email: credentials.email,
           },
         });

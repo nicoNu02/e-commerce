@@ -20,10 +20,12 @@ const auth = NextAuth({
           placeholder: "*****",
         },
       },
+      //@ts-ignore
       authorize: async (credentials) => {
         console.log(credentials);
         const userFound = await prisma.user.findUnique({
           where: {
+            //@ts-ignore
             email: credentials.email,
           },
         });
@@ -54,5 +56,5 @@ export default auth.auth((req) => {
 });
 console.log("middleware");
 export const config = {
-  matcher: ["/account"],
+  matcher: ["/upload"],
 };

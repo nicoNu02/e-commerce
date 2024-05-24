@@ -27,7 +27,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/api/auth/register/route.ts",
-    "src/libs/db.js",
+    "src/libs/db.ts",
     "src/app/api/auth/[...nextauth]/route.ts",
     "auth.config.js"
   ],

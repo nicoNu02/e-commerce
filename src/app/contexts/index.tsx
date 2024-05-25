@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 interface Cart {
-  id: number;
+  id: string;
   count: number;
   color: string;
 }
@@ -19,7 +19,7 @@ interface AppContextValue {
   handleAddToCart: (product: Cart) => void;
 }
 const AppContext = createContext<AppContextValue | undefined>(undefined);
-const initialCart: Cart = { id: -1, count: -1, color: "white" };
+const initialCart: Cart = { id: "", count: -1, color: "white" };
 
 export default function AppContextProvider({
   children,

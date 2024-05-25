@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useAppContext } from "../contexts";
 import { useState } from "react";
 
-const ButtonSubmit = ({ productId }: { productId: number }) => {
+const ButtonSubmit = ({ productId }: { productId: string }) => {
   //@ts-ignore
   const { handleAddToCart, cart } = useAppContext();
   const [ok, setOk] = useState<boolean | null>();

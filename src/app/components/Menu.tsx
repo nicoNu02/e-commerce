@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import menu from "../../assets/menuIcon.svg";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -25,7 +24,8 @@ const Menu = () => {
   return (
     <>
       <button onClick={handleClick} className="relative overflow-hidden">
-        <Image src={menu} alt="menu-icon" unoptimized />
+        {/* todo  add a menu icon to the db */}
+        {/* <Image src={menu} alt="menu-icon" unoptimized /> */}
       </button>
       <div className="absolute overflow-hidden w-full left-0 mt-5">
         <div

@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import cartIcon from "../../assets/cartIcon.svg";
 import { useAppContext } from "../contexts";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -8,13 +7,13 @@ const CartIcon = () => {
   const { cart } = useAppContext();
   const path = usePathname();
   const params = useSearchParams();
-  const { replace } = useRouter();
+  const { push } = useRouter();
   const cartItems = cart.length;
 
   const handleClick = () => {
     const searchParams = new URLSearchParams(params);
     searchParams.set("cart", "open");
-    replace(`${path}?${searchParams.toString()}`);
+    push(`${path}?${searchParams.toString()}`, { scroll: false });
   };
   return (
     <button className="relative" onClick={handleClick}>
@@ -23,7 +22,13 @@ const CartIcon = () => {
           <span className="leading-none text-white	">{cartItems}</span>
         </span>
       ) : null}
-      <Image src={cartIcon} alt="cart-icon" unoptimized />
+      <Image
+        src="https://u8v8yhe8bp8fkg64.public.blob.vercel-storage.com/cartIcon-ZL0CnRIbycmSt6i4dnWY1XVgAxPrtm.svg"
+        alt="cart-icon"
+        width={19}
+        height={19}
+        unoptimized
+      />
     </button>
   );
 };

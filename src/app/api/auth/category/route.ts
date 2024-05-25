@@ -14,6 +14,6 @@ export async function POST(req: Request): Promise<NextResponse | undefined> {
 }
 
 export async function GET(req: Request) {
-  console.log("asdasd");
-  return NextResponse.json({ status: 200 });
+  const categories = await prisma.category.findMany({});
+  return NextResponse.json({ status: 200, body: categories });
 }

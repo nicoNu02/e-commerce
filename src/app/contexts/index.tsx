@@ -6,6 +6,13 @@ interface Cart {
   count: number;
   color: string;
 }
+
+interface Category {
+  id: number;
+  name: string;
+  description: string | null;
+}
+
 interface AppContextValue {
   cart: Cart[];
   setCart: React.Dispatch<React.SetStateAction<Cart[]>>;

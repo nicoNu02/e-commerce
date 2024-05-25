@@ -1,5 +1,4 @@
 import Modal from "@/app/components/Modal";
-import { PRODUCTS } from "@/products/products";
 import Image from "next/image";
 
 export default function ProductPage({
@@ -7,11 +6,11 @@ export default function ProductPage({
 }: {
   params: { productId: string };
 }) {
-  const product = PRODUCTS[Number(params.productId)];
+  // const product = PRODUCTS[Number(params.productId)];
   return (
     <>
       <div className="h-1/2">
-        <Image
+        {/* <Image
           className="h-full w-auto rounded-lg"
           src={product.src[0]}
           alt={product.desc}
@@ -29,7 +28,7 @@ export default function ProductPage({
           return (
             <div key={i} className={`bg-${color} rounded-full w-4 h-4`}></div>
           );
-        })}
+        })} */}
       </div>
     </>
   );

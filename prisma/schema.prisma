@@ -11,11 +11,14 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
+
+
 model User {
-  id            Int      @id @default(autoincrement())
+  id            String   @id @default(cuid())
   name          String   @unique
   email         String   @unique
   password      String
+  role          String   @default("USER")
   created_at    DateTime @default(now())
   cart          Cart?
   address       Address?
@@ -27,34 +30,45 @@ model User {
 }
 
 model Image {
-  id         Int     @id @default(autoincrement())
+  id         String  @id @default(cuid())
   url        String  @unique
   product    Product @relation(fields: [product_id], references: [id])
-  product_id Int
+  product_id String
 }
 
 model Category {
-  id          Int               @id @default(autoincrement())
+  id          String            @id @default(cuid())
   name        String            @unique
   description String?
   products    ProductCategory[]
+  image       String?
 }
 
 model Product {
-  id           Int               @id @default(autoincrement())
-  name         String            @unique
-  description  String
-  images       Image[]
-  colors       String?
-  price        Float
-  itemsLeft    Int?
-  categories   ProductCategory[]
-  cartProducts CartProduct[]
+  id                String            @id @default(cuid())
+  name              String            @unique
+  description       String
+  discount          Int?
+  aditional_details String?
+  images            Image[]
+  colors            Color[]
+  price             Int
+  itemsLeft         Int?
+  categories        ProductCategory[]
+  cartProducts      CartProduct[]
+}
+
+model Color {
+  id         String  @id @default(cuid())
+  name       String
+  code       String  @unique
+  product    Product? @relation(fields: [product_id], references: [id])
+  product_id String
 }
 
 model ProductCategory {
-  product_id  Int
-  category_id Int
+  product_id  String
+  category_id String
   product     Product  @relation(fields: [product_id], references: [id])
   category    Category @relation(fields: [category_id], references: [id])
 
@@ -62,16 +76,15 @@ model ProductCategory {
 }
 
 model Cart {
-  id          Int           @id @default(autoincrement())
-  products    CartProduct[]
-  description String
-  userId      Int           @unique
-  user        User          @relation(fields: [userId], references: [id])
+  id       String        @id @default(cuid())
+  products CartProduct[]
+  userId   String        @unique
+  user     User          @relation(fields: [userId], references: [id])
 }
 
 model CartProduct {
-  cartId    Int
-  productId Int
+  cartId    String
+  productId String
   quantity  Int
 
   cart    Cart    @relation(fields: [cartId], references: [id])
@@ -81,9 +94,9 @@ model CartProduct {
 }
 
 model Address {
-  id           Int     @id @default(autoincrement())
+  id           String  @id @default(cuid())
   user         User    @relation(fields: [UserId], references: [id])
-  UserId       Int     @unique
+  UserId       String  @unique
   address_line String
   house_number String
   floor        String?

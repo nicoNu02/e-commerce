@@ -1,13 +1,12 @@
 import Image from "next/image";
 
-import search from "../../assets/searchIcon.svg";
 import Link from "next/link";
 import Menu from "./Menu";
 import CartIcon from "./CartIcon";
 
 const Header = () => {
   return (
-    <header className="flex justify-between items-center p-8 h-10 border-b-2">
+    <header className="flex justify-between items-center p-8 h-10 w-auto border-b-2">
       <div className="hidden lg:flex justify-between gap-4 font-bold text-lg ">
         <Link href={"/"} className="hover:bg-black">
           Inicio
@@ -23,15 +22,13 @@ const Header = () => {
         <Menu />
       </div>
       <div className="flex gap-4">
-        <span>
-          <Image
-            src="https://u8v8yhe8bp8fkg64.public.blob.vercel-storage.com/searchIcon-ysvRqR1w71dKnOIWDdVE1T2xtOFdBH.svg"
-            alt="search-icon"
-            width={19}
-            height={19}
-            unoptimized
-          />
-        </span>
+        <Image
+          src="https://u8v8yhe8bp8fkg64.public.blob.vercel-storage.com/searchIcon-ysvRqR1w71dKnOIWDdVE1T2xtOFdBH.svg"
+          alt="search-icon"
+          width={19}
+          height={19}
+          unoptimized
+        />
         <CartIcon />
         <span>
           <Image

@@ -249,7 +249,6 @@ export default function ProductUpload() {
           <div className="flex pb-4">
             {url.map((u, i) => (
               <div key={i}>
-                {/*@ts-ignore*/}
                 <img
                   src={u}
                   height={100}

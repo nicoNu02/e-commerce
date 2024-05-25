@@ -6,7 +6,16 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
-export default function SwiperCategory({ categories }) {
+export default function SwiperCategory({
+  categories,
+}: {
+  categories: {
+    id: string;
+    name: string;
+    description: string | null;
+    image: string | null;
+  }[];
+}) {
   return (
     <>
       <div className="w-full flex flex-col justify-center items-center">

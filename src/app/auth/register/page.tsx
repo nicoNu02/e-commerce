@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 export default function RegisterPage() {
   const { register, handleSubmit } = useForm();
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
     const res = await fetch("/api/auth/register", {
       method: "POST",
       body: JSON.stringify(data),
@@ -12,7 +11,6 @@ export default function RegisterPage() {
       },
     });
     const resJSON = await res.json();
-    console.log(resJSON);
   });
   return (
     <div>

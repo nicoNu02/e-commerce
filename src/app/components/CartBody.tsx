@@ -8,6 +8,7 @@ const CartBody = () => {
   return (
     <div>
       {cart.map(
+        //@ts-ignore
         (prod: { id: number; count: number; color: string }, i: number) => {
           return (
             <div key={i} className="flex bg-white my-4 rounded-md p-2">

@@ -15,14 +15,14 @@ interface Product {
   id: string;
   name: string;
   description: string;
-  colors: string | null;
+  colors?: string | null;
   price: number;
   itemsLeft: number | null;
 }
 interface Image {
   id: string;
   url: string;
-  product_id: number;
+  product_id: string;
 }
 
 export default function SwiperDefault({

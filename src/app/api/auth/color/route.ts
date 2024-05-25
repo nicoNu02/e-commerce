@@ -12,6 +12,6 @@ export async function GET(req: Request) {
   return NextResponse.json({ body: colors });
 }
 
-export async function POST(req: Request) {
-  return null;
-}
+// export async function POST(req: Request) {
+//   return null;
+// }

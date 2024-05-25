@@ -415,8 +415,7 @@ export default function ProductUpload() {
                 </div>
               ))}
           </div>
-          {url.length > 0 &&
-          url.length == inputFileRef.current?.files?.length ? (
+          {url.length > 0 ? (
             <button
               className="bg-purple-700 text-white font-bold p-2 rounded-md w-64 self-center"
               type="submit"

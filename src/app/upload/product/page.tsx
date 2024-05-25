@@ -39,7 +39,7 @@ const initialProduct: Product = {
     hair: "",
     eyebrows: "",
     face: "",
-    all: "",
+    all: "clwlq8bjn0000126bjghkwt9s",
   },
 };
 const initialColor: Color = {
@@ -89,8 +89,6 @@ export default function ProductUpload() {
   };
   //@ts-ignore
   const handleChangeFile = (e) => {
-    console.log(inputFileRef.current?.files);
-
     if (e.target.files.length > 0) {
       setIsSelected(true);
     } else setIsSelected(false);
@@ -144,9 +142,7 @@ export default function ProductUpload() {
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
     id: string
   ) => {
-    console.log(product);
     const name = e.target.name;
-    console.log(name);
     if (name == "Cabello")
       setProduct({
         ...product,

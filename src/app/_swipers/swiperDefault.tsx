@@ -23,7 +23,7 @@ export default function SwiperDefault({
 }) {
   return (
     <Suspense fallback={<Loading />}>
-      <div className="h-80 mx-2 md:mx-16 md:h-96 lg:mx-16 lg:h-[30rem]">
+      <div className="h-80 mx-2 sm:mx-16 md:mx-16 lg:mx-16 sm:h-[40vh]">
         <Swiper
           key={"asd"}
           className="h-full mx-32"

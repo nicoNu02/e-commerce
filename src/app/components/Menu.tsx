@@ -24,8 +24,15 @@ const Menu = () => {
   return (
     <>
       <button onClick={handleClick} className="relative overflow-hidden">
-        {/* todo  add a menu icon to the db */}
-        {/* <Image src={menu} alt="menu-icon" unoptimized /> */}
+        <Image
+          src={
+            "https://u8v8yhe8bp8fkg64.public.blob.vercel-storage.com/menuIcon-t7KsbrKrff1hfKxgbYErT5vGFCKh25.svg"
+          }
+          alt="menu-icon"
+          width={30}
+          height={30}
+          unoptimized
+        />
       </button>
       <div className="absolute overflow-hidden w-full left-0 mt-5">
         <div

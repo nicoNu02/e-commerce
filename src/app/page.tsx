@@ -3,7 +3,6 @@ import SwiperDefault from "./_swipers/swiperDefault";
 import Loading from "./components/loading";
 import Header from "./components/Header";
 import Shipping from "./components/Shipping";
-import CartModal from "./components/CartModal";
 import SwiperCategory from "./_swipers/swiperCategory";
 import { FetchProducts, fetchCategories, fetchImages } from "../../fetchData";
 
@@ -21,7 +20,6 @@ export default async function Home({
   return (
     <Suspense fallback={<Loading />}>
       <Header />
-      {/* <CartModal searchParams={searchParams} /> */}
       <Shipping />
       <SwiperDefault products={products} images={images} />
       <SwiperCategory categories={categories} />

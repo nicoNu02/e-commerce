@@ -39,7 +39,7 @@ export default function ButtonChangeImage({
         {images.map((it, i) => {
           return (
             <div
-              className={"relative size-[15vw] md:size-20 mb-4"}
+              className={"relative size-[15vw] sm:size-20 md:size-20 mb-4"}
               key={i}
               onClick={() => handleClick(i)}
             >

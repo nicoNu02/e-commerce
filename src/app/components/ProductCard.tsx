@@ -4,8 +4,6 @@ import Image from "next/image";
 import { Suspense } from "react";
 import Loading from "./loading";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
 
 const ProductCard = ({
   idx,

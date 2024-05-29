@@ -25,7 +25,7 @@ export default function ButtonChangeImage({
   const [actualI, setActualI] = useState(actualImage || 0);
   return (
     <>
-      <div className="w-full h-full place-self-center flex justify-center items-center relative mb-4 md:w-1/2 lg:w-1/2">
+      <div className="w-[50vw] h-[70vh] place-self-center flex justify-center items-center relative mb-4 md:w-1/2 md:h-full lg:w-1/2 lg:h-full sm:w-1/2 sm:h-3/4">
         <Image
           className="rounded-lg"
           src={images[actualI].url}
@@ -39,7 +39,7 @@ export default function ButtonChangeImage({
         {images.map((it, i) => {
           return (
             <div
-              className={"relative size-20 mb-4"}
+              className={"relative size-[15vw] md:size-20 mb-4"}
               key={i}
               onClick={() => handleClick(i)}
             >

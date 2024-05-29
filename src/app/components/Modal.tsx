@@ -37,7 +37,7 @@ const Modal = async ({
             href={"/"}
             className="w-full h-screen fixed top-0 left-0 z-[40]"
           />
-          <div className="box-border z-[90] bg-white h-5/6 w-3/4 flex flex-col p-8 overflow-scroll">
+          <div className="box-border z-[90] bg-white h-[60%] w-3/4 flex flex-col p-4 md:p-8 overflow-scroll lg:h-[90%] md:h-[90%] sm:h-[70%]">
             <ButtonChangeImage
               product={product}
               images={images}

@@ -4,6 +4,8 @@ import Image from "next/image";
 import { Suspense } from "react";
 import Loading from "./loading";
 import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const ProductCard = ({
   idx,
@@ -24,12 +26,16 @@ const ProductCard = ({
       ]
     | undefined[];
 }) => {
+  // Your client-side code that uses window goes here
   const getUrl = (id: string) => {
-    const url = new URL(`/product/${id}`, "http://localhost:3000");
-    url.searchParams.delete("cart");
-    url.searchParams.set("modal", "open");
-    url.searchParams.set("img", "0");
-    return url;
+    if (typeof window !== "undefined") {
+      const url = new URL(`/product/${id}`, window?.location.origin);
+      url.searchParams.delete("cart");
+      url.searchParams.set("modal", "open");
+      url.searchParams.set("img", "0");
+      return url;
+    }
+    return "";
   };
   const imageFound = images.find((value) => {
     return value?.product_id == idx;

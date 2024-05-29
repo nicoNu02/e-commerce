@@ -1,7 +1,7 @@
 import prisma from "@/libs/db";
 import { NextResponse } from "next/server";
 
-export async function GET(req: Response) {
+export async function GET(req: Request) {
   console.log(req);
   //@ts-ignore
   const colors = await prisma.color.findMany({

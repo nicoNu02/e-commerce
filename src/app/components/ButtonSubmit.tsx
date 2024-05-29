@@ -3,8 +3,16 @@
 import { useSearchParams } from "next/navigation";
 import { useAppContext } from "../contexts";
 import { useState } from "react";
+import { Image } from "@prisma/client";
+import { Product } from "@/types/types";
 
-const ButtonSubmit = ({ productId }: { productId: string }) => {
+const ButtonSubmit = ({
+  product,
+  image,
+}: {
+  product: Product;
+  image: Image;
+}) => {
   //@ts-ignore
   const { handleAddToCart, cart } = useAppContext();
   const [ok, setOk] = useState<boolean | null>();
@@ -13,12 +21,15 @@ const ButtonSubmit = ({ productId }: { productId: string }) => {
     const color = params.get("color") || "";
     const count = Number(params.get("count")) || null;
     if (color !== "" && count !== null) {
-      const product = {
-        id: productId,
+      const cartProduct = {
+        id: product.id,
         color: color,
         count: count,
+        name: product.name,
+        price: product.price,
+        url: image.url,
       };
-      handleAddToCart(product);
+      handleAddToCart(cartProduct);
       setOk(true);
     } else setOk(false);
     setTimeout(() => {
@@ -26,18 +37,18 @@ const ButtonSubmit = ({ productId }: { productId: string }) => {
     }, 1000);
   };
   return (
-    <div className="flex flex-col justify-center items-center m-4 relative">
+    <div className="flex flex-col justify-center items-center my-4 relative w-full">
       <button
         type="button"
         onClick={handleSubmit}
-        className="bg-black text-white px-9 py-4 rounded"
+        className="bg-black text-white px-9 py-4 rounded-lg w-full md:w-1/2"
       >
         Agregar al Carrito
       </button>
       {ok === true ? (
-        <div className="absolute top-[-30px]">Agregado al carrito</div>
+        <div className="absolute top-[60px]">Agregado al carrito</div>
       ) : ok === false ? (
-        <div className="absolute top-[-30px] text-[red]">
+        <div className="absolute top-[60px] text-[red]">
           Error al agregar al carrito
         </div>
       ) : null}

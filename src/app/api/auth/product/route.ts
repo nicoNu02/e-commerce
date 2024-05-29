@@ -73,6 +73,6 @@ export async function POST(req: Request): Promise<NextResponse | undefined> {
 }
 
 export async function GET(req: Request) {
-  console.log("GET request received");
-  return NextResponse.json({ status: 200 });
+  const products = await prisma.product.findMany();
+  return NextResponse.json({ status: 200, body: products });
 }

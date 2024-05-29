@@ -3,15 +3,17 @@
 import Image from "next/image";
 import { Suspense } from "react";
 import Loading from "./loading";
+import Link from "next/link";
+
 const ProductCard = ({
   idx,
   images,
   name,
-  handleClick,
+  price,
 }: {
   name: string;
   idx: string;
-  handleClick: (idx: string) => void;
+  price: string;
   images:
     | [
         {
@@ -22,6 +24,13 @@ const ProductCard = ({
       ]
     | undefined[];
 }) => {
+  const getUrl = (id: string) => {
+    const url = new URL(`/product/${id}`, "http://localhost:3000");
+    url.searchParams.delete("cart");
+    url.searchParams.set("modal", "open");
+    url.searchParams.set("img", "0");
+    return url;
+  };
   const imageFound = images.find((value) => {
     return value?.product_id == idx;
   });
@@ -44,14 +53,15 @@ const ProductCard = ({
           {name}
         </h5>
         <p className="pt-2">
-          <b>$00</b>
+          <b>${price}</b>
         </p>
-        <button
-          onClick={() => handleClick(idx)}
+        <Link
+          href={getUrl(idx)}
+          scroll={false}
           className="bg-black rounded-2xl text-white w-3/4 h-8 flex items-center justify-center mb-4 mt-2"
         >
           Comprar
-        </button>
+        </Link>
       </div>
     </Suspense>
   );

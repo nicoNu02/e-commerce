@@ -21,7 +21,7 @@ export default async function Home({
   return (
     <Suspense fallback={<Loading />}>
       <Header />
-      <CartModal searchParams={searchParams} />
+      {/* <CartModal searchParams={searchParams} /> */}
       <Shipping />
       <SwiperDefault products={products} images={images} />
       <SwiperCategory categories={categories} />

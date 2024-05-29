@@ -8,7 +8,7 @@ const Shipping = async () => {
         unoptimized
         width={4}
         height={4}
-        alt="pene"
+        alt="shipping"
         className="w-16"
       />
       <h2>ENVIOS A TODO EL PAÍS</h2>

@@ -28,3 +28,10 @@ export const FetchProductById = async (idx: number | string) => {
   });
   return product;
 };
+
+export const FetchColorsByProductId = async (id: string) => {
+  const colors = await prisma.color.findMany({
+    where: { product_id: id },
+  });
+  return colors;
+};

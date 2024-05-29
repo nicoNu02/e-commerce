@@ -1,11 +1,7 @@
 "use client";
 
+import { Cart } from "@/types/types";
 import { createContext, useContext, useEffect, useState } from "react";
-interface Cart {
-  id: string;
-  count: number;
-  color: string;
-}
 
 interface Category {
   id: number;
@@ -17,9 +13,9 @@ interface AppContextValue {
   cart: Cart[];
   setCart: React.Dispatch<React.SetStateAction<Cart[]>>;
   handleAddToCart: (product: Cart) => void;
+  handleDeleteFromCart: (product: Cart) => void;
 }
 const AppContext = createContext<AppContextValue | undefined>(undefined);
-const initialCart: Cart = { id: "", count: -1, color: "white" };
 
 export default function AppContextProvider({
   children,
@@ -46,13 +42,27 @@ export default function AppContextProvider({
           alreadyExist = true;
           return;
         }
+        return;
       });
-    newCart = [...newCart, product];
-    if (cart.length == 0 || !alreadyExist) setCart(newCart);
+    if (cart.length == 0 || !alreadyExist) {
+      newCart = [...newCart, product];
+      setCart(newCart);
+    }
     localStorage.setItem("myData", JSON.stringify(newCart));
   };
+
+  const handleDeleteFromCart = (product: Cart) => {
+    let newCart = [...cart];
+    const filteredItems = newCart.filter(
+      (prod) => prod.id !== product.id && prod.color !== product.color
+    );
+    setCart(filteredItems);
+    localStorage.setItem("myData", JSON.stringify(filteredItems));
+  };
   return (
-    <AppContext.Provider value={{ cart, setCart, handleAddToCart }}>
+    <AppContext.Provider
+      value={{ cart, setCart, handleAddToCart, handleDeleteFromCart }}
+    >
       {children}
     </AppContext.Provider>
   );

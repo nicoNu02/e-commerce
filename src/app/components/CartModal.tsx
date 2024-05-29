@@ -1,21 +1,16 @@
-"use client";
-import { usePathname } from "next/navigation";
 import CartBody from "../components/CartBody";
 import CloseCart from "../components/CloseCart";
 
 export default function CartPage({
-  searchParams,
+  isOpen,
+  handleClose,
+  path,
 }: {
-  searchParams: {
-    cart: string;
-    modal: string;
-  };
+  isOpen: boolean;
+  handleClose: () => void;
+  path: string;
 }) {
-  const path = usePathname();
-  const visible =
-    searchParams?.cart === "open" &&
-    searchParams?.modal != "open" &&
-    !path.includes("/product/");
+  const visible = isOpen && !path.includes("/product/");
   return (
     <div
       className={
@@ -26,7 +21,7 @@ export default function CartPage({
     >
       {visible && (
         <>
-          <CloseCart />
+          <CloseCart handleClose={handleClose} />
           <CartBody />
         </>
       )}

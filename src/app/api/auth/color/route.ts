@@ -1,12 +1,15 @@
 import prisma from "@/libs/db";
 import { NextResponse } from "next/server";
 
-export async function GET(req: Request) {
+export async function GET(req: Response) {
+  console.log(req);
+  //@ts-ignore
   const colors = await prisma.color.findMany({
     select: {
       id: true,
       name: true,
       code: true,
+      product_id: true,
     },
   });
   return NextResponse.json({ body: colors });

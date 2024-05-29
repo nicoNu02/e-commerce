@@ -1,36 +1,41 @@
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
-
+import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 const AddItemCounter = () => {
-  const pathname = usePathname();
+  const [counter, setCounter] = useState(0);
   const params = useSearchParams();
-  const { replace } = useRouter();
   const handleChange = (cant: number) => {
-    const searchParams = new URLSearchParams(params);
+    const searchParams = new URLSearchParams(params.toString());
     const actualCount = parseInt(searchParams.get("count") || "0");
+    searchParams.set("count", actualCount.toString());
+    setCounter(actualCount);
     if (actualCount + cant > 0) {
       searchParams.set("count", String(actualCount + cant));
+      setCounter(counter + cant);
     } else {
       searchParams.delete("count");
+      setCounter(0);
     }
-    replace(`${pathname}?${searchParams.toString()}`);
+    //thisis beacause replace or push rerenders the page multiple times
+    window.history.pushState(null, "", `?${searchParams.toString()}`);
   };
   return (
-    <div className="flex w-32 gap-2">
+    <div className="flex w-full h-16 gap-2 md:w-64">
       <button
-        className={"bg-black text-white w-8 rounded font-bold"}
+        className={"bg-black text-white w-16 rounded font-bold"}
         onClick={() => handleChange(-1)}
+        type="button"
       >
         -
       </button>
-      <div className="flex-1 text-center bg-zinc-400 rounded">
-        {params.get("count")?.toString() || 0}
+      <div className="w-24 text-center bg-zinc-400 rounded flex justify-center items-center">
+        {counter}
       </div>
       <button
-        className={"bg-black text-white w-8 rounded font-bold"}
+        className={"bg-black text-white w-16 rounded font-bold"}
         onClick={() => handleChange(1)}
+        type="button"
       >
         +
       </button>

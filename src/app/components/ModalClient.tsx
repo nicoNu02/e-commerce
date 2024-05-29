@@ -15,13 +15,7 @@ const ModalClient = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      <div className="w-full h-screen fixed top-0 left-0 z-[30] flex flex-col items-center justify-center backdrop-blur-sm color">
-        <div
-          onClick={handleBackClick}
-          className="w-full h-screen fixed top-0 left-0 z-[40]"
-        />
-        {children}
-      </div>
+      <div>{children}</div>
     </>
   );
 };

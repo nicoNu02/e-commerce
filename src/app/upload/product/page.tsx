@@ -18,6 +18,7 @@ interface Product {
   };
 }
 interface Color {
+  id: string;
   name: string | readonly string[] | number | undefined;
   code: string | readonly string[] | number | undefined;
   product_id?: string | readonly string[] | number | undefined;
@@ -43,6 +44,7 @@ const initialProduct: Product = {
   },
 };
 const initialColor: Color = {
+  id: "",
   name: "",
   code: "",
   product_id: "",
@@ -359,7 +361,13 @@ export default function ProductUpload() {
                         colorSelected.some((code) => code == col.code) &&
                         "border-4 border-black"
                       }`}
-                      onClick={() => handleClickColor(col)}
+                      onClick={() =>
+                        handleClickColor({
+                          id: col.id,
+                          name: col.name,
+                          code: col.code,
+                        })
+                      }
                     ></div>
                     <p className="font-bold text-slate-200 mb-2">{col.name}</p>
                   </div>

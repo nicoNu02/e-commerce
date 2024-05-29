@@ -7,23 +7,12 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import ProductCard from "../components/ProductCard";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
+// import { usePathname, useSearchParams } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { Suspense } from "react";
 import Loading from "../components/loading";
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  colors?: string | null;
-  price: number;
-  itemsLeft: number | null;
-}
-interface Image {
-  id: string;
-  url: string;
-  product_id: string;
-}
+import { Image, Product } from "@/types/types";
+import { ConvertToLocalePrice } from "@/utils/convertion";
 
 export default function SwiperDefault({
   products,
@@ -32,20 +21,6 @@ export default function SwiperDefault({
   products: Product[];
   images: Image[];
 }) {
-  const path = usePathname();
-  const params = useSearchParams();
-  const router = useRouter();
-
-  const handleClick = (idx: string) => {
-    const searchParams = new URLSearchParams(params);
-    searchParams.delete("cart");
-    searchParams.set("modal", "open");
-    searchParams.set("img", "0");
-    console.log(path, searchParams.toString());
-    router.push(`/product/${idx}?${searchParams.toString()}`, {
-      scroll: false,
-    });
-  };
   return (
     <Suspense fallback={<Loading />}>
       <div className="h-80 mx-2 md:mx-16 md:h-96 lg:mx-16 lg:h-[30rem]">
@@ -80,15 +55,16 @@ export default function SwiperDefault({
           {products?.map((key, i) => {
             const name = key.name;
             const idx = key.id;
+            const price = ConvertToLocalePrice(key.price);
             return (
               <SwiperSlide key={i} className="flex">
                 <div className="flex flex-col items-center justify-between w-full h-full border-solid border-2 rounded-xl">
                   <ProductCard
                     name={name}
                     idx={idx}
-                    handleClick={handleClick}
                     //@ts-ignore
                     images={images}
+                    price={price}
                   />
                 </div>
               </SwiperSlide>

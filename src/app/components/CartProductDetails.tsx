@@ -17,9 +17,9 @@ export default function CartProductDetails({ prod }: { prod: Cart }) {
     return;
   };
   return (
-    <div className="flex bg-zinc-800 my-4 rounded-md p-4 relative items-center">
+    <div className="flex bg-zinc-800 my-4 rounded-md p-4 relative items-center  ">
       {/* todo: fix this */}
-      <div className="h-20 relative mr-4 w-24">
+      <div className="h-[20vw] w-[25vw] relative mr-4 w-24 sm:h-20 sm:w-20">
         <Image
           className="rounded"
           src={prod.url}
@@ -28,7 +28,7 @@ export default function CartProductDetails({ prod }: { prod: Cart }) {
           sizes="max-width(200px), 200px"
         />
       </div>
-      <div className="flex w-full justify-between items-center">
+      <div className="flex flex-col w-full justify-between sm:flex-row">
         <div>
           <p className="font-bold text-lg text-zinc-200 ">{prod.name}</p>
           <p
@@ -37,7 +37,7 @@ export default function CartProductDetails({ prod }: { prod: Cart }) {
           ></p>
           <AddItemCounterCart handleChange={handleChange} count={count} />
         </div>
-        <div className="flex gap-4 items-center">
+        <div className="flex m-2 gap-4 items-center sm:m-0">
           <p className="font-bold text-lg text-zinc-200">
             ${ConvertToLocalePrice(prod.price)}
           </p>

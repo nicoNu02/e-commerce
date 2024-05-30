@@ -7,21 +7,14 @@ import SwiperCategory from "./_swipers/swiperCategory";
 import { FetchProducts, fetchCategories, fetchImages } from "../../fetchData";
 import WhatsappIcon from "./components/WhatsappIcon";
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: {
-    cart: string;
-    modal: string;
-  };
-}) {
+export default async function Home() {
   const images = await fetchImages();
   const products = await FetchProducts();
   const categories = await fetchCategories();
   return (
     <>
-      <Header />
       <Suspense fallback={<Loading />}>
+        <Header />
         <WhatsappIcon />
         <Shipping />
         <SwiperDefault

@@ -25,7 +25,7 @@ export default function ButtonChangeImage({
   const [actualI, setActualI] = useState(actualImage || 0);
   return (
     <>
-      <div className="w-[50vw] h-[70vh] place-self-center flex justify-center items-center relative mb-4 md:w-1/2 md:h-full lg:w-1/2 lg:h-full sm:w-1/2 sm:h-3/4">
+      <div className="w-[50vw] h-[70vh] min-w-56 min-h-56 place-self-center flex justify-center items-center relative mb-4 md:w-1/2 md:h-full lg:w-[45%] lg:h-full sm:w-1/2 sm:h-3/4">
         <Image
           className="rounded-lg"
           src={images[actualI].url}

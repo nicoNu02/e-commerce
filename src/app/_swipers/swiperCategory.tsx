@@ -3,8 +3,6 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
 
 export default function SwiperCategory({
   categories,
@@ -18,7 +16,10 @@ export default function SwiperCategory({
 }) {
   return (
     <>
-      <div className="w-full flex flex-col justify-center items-center">
+      <div
+        className="w-full flex flex-col justify-center items-center "
+        style={{ zIndex: -1 }}
+      >
         <h1 className="font-bold text-4xl mt-8">Categorías</h1>
         <p className="w-1/2 text-center mb-4">
           Encontrá más fácil el producto que buscás
@@ -50,19 +51,23 @@ export default function SwiperCategory({
           }}
           navigation
         >
-          {categories?.map((cat, i) => (
-            <SwiperSlide key={i}>
-              <div className="flex flex-col items-center w-full h-full border-solid border-2 rounded-xl">
-                <div
-                  key={i}
-                  className="text-2xl font-bold h-full flex flex-col justify-center"
-                >
-                  <span className="mt-10">{cat.name.toUpperCase()}</span>
+          {categories?.map((cat, i) =>
+            cat.name !== "Todo" ? (
+              <SwiperSlide key={i}>
+                <div className="flex flex-col items-center w-full h-full border-solid border-2 rounded-xl">
+                  <div
+                    key={i}
+                    className="text-2xl font-bold h-full flex flex-col justify-center"
+                  >
+                    <span className="mt-10 text-center">
+                      {cat.name.toUpperCase()}
+                    </span>
+                  </div>
+                  <div className="bg-black w-full h-16 rounded-b-xl"></div>
                 </div>
-                <div className="bg-black w-full h-16 rounded-b-xl"></div>
-              </div>
-            </SwiperSlide>
-          ))}
+              </SwiperSlide>
+            ) : null
+          )}
         </Swiper>
       </div>
     </>

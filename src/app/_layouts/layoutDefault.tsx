@@ -1,5 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
+import FooterDefault from "../components/FooterDefault";
 
 export default function LayoutDefault({
   children,
@@ -15,7 +16,7 @@ export default function LayoutDefault({
     return (
       <div className="flex flex-col">
         <section className="relative overflow-hidden">{children}</section>
-        <footer className="pt-4">asdas</footer>
+        <FooterDefault />
       </div>
     );
   } else return <div>{children}</div>;

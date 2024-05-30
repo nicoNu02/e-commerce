@@ -9,21 +9,27 @@ import "swiper/css/scrollbar";
 import ProductCard from "../components/ProductCard";
 // import { usePathname, useSearchParams } from "next/navigation";
 // import { useRouter } from "next/navigation";
-import { Suspense } from "react";
-import Loading from "../components/loading";
 import { Image, Product } from "@/types/types";
 import { ConvertToLocalePrice } from "@/utils/convertion";
 
 export default function SwiperDefault({
   products,
   images,
+  title,
+  description,
 }: {
   products: Product[];
   images: Image[];
+  title: string | null;
+  description: string | null;
 }) {
   return (
-    <Suspense fallback={<Loading />}>
-      <div className="h-80 mx-2 sm:mx-16 md:mx-16 lg:mx-16 sm:h-[40vh]">
+    <>
+      <div className="w-full flex flex-col items-center">
+        <h1 className="font-bold text-4xl mt-8">{title}</h1>
+        <p className="w-1/2 text-center mb-4">{description}</p>
+      </div>
+      <div className="h-80 mx-2 sm:mx-16 md:mx-16 lg:mx-16 sm:h-[45vh]">
         <Swiper
           key={"asd"}
           className="h-full mx-32"
@@ -58,7 +64,7 @@ export default function SwiperDefault({
             const price = ConvertToLocalePrice(key.price);
             return (
               <SwiperSlide key={i} className="flex">
-                <div className="flex flex-col items-center justify-between w-full h-full border-solid border-2 rounded-xl">
+                <div className="flex flex-col items-center justify-between w-[30vw] min-w-40 h-full border-solid border-2 rounded-xl sm:w-64">
                   <ProductCard
                     name={name}
                     idx={idx}
@@ -72,7 +78,7 @@ export default function SwiperDefault({
           })}
         </Swiper>
       </div>
-    </Suspense>
+    </>
   );
 }
 

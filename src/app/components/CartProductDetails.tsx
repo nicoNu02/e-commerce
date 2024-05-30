@@ -18,7 +18,6 @@ export default function CartProductDetails({ prod }: { prod: Cart }) {
   };
   return (
     <div className="flex bg-zinc-800 my-4 rounded-md p-4 relative items-center  ">
-      {/* todo: fix this */}
       <div className="h-[20vw] w-[25vw] relative mr-4 w-24 sm:h-20 sm:w-20">
         <Image
           className="rounded"

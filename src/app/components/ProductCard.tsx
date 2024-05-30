@@ -52,8 +52,9 @@ const ProductCard = ({
           />
         </div>
       </div>
-      <div className="flex flex-col items-center h-48 w-full justify-center">
-        <h5 className="text-center h-12 flex flex-col items-center justify-center pt-2">
+      <div className="flex flex-col items-center min-h-[50%] w-full justify-between sm:justify-center sm:min-h-[33%]">
+        {/* 35 character limit prevents text overflow */}
+        <h5 className="text-center h-12 flex flex-col items-center justify-center pt-2 px-1 font-medium">
           {name}
         </h5>
         <p className="pt-2">

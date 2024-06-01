@@ -61,11 +61,13 @@ export default function AppContextProvider({
     if (cart.length == 0 || !alreadyExist) {
       newCart = [...newCart, product];
       setCart(newCart);
+      localStorage.setItem("myData", JSON.stringify({ cart: newCart }));
+    } else {
+      localStorage.setItem(
+        "myData",
+        JSON.stringify({ cart: newCart, method: method })
+      );
     }
-    localStorage.setItem(
-      "myData",
-      JSON.stringify({ cart: newCart, method: method })
-    );
   };
   const handleChangeMethod = (method: Method) => {
     setMethod(method);

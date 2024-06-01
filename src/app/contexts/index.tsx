@@ -77,10 +77,7 @@ export default function AppContextProvider({
       (prod) => prod.id !== product.id && prod.color !== product.color
     );
     setCart(filteredItems);
-    localStorage.setItem(
-      "myData",
-      JSON.stringify({ cart: filteredItems, method: method })
-    );
+    localStorage.setItem("myData", JSON.stringify({ cart: filteredItems }));
   };
 
   const handleUpdateFormCheckout = (data: FormCheckout) => {

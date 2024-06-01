@@ -1,33 +1,28 @@
 "use client";
 
-import { Cart } from "@/types/types";
+import { Cart, Method } from "@/types/types";
 import { useAppContext } from "../contexts";
 import CartProductDetails from "./CartProductDetails";
 import { ConvertToLocalePrice } from "@/utils/convertion";
 import ShippingMethod from "./ShippingMethod";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-interface Method {
-  id: number;
-  title: string;
-  details: string;
-  price: number;
-}
+
 const methods: Method[] = [
   {
-    id: 1,
+    id: 0,
     title: "Envio a domicilio",
     price: 990,
     details: "3 a 5 dias habiles",
   },
   {
-    id: 2,
+    id: 1,
     title: "Envio a sucursal",
     price: 980,
     details: "3 a 5 dias habiles",
   },
   {
-    id: 3,
+    id: 2,
     title: "Retiro en local",
     price: 970,
     details: "1 a 3 dias habiles",
@@ -35,17 +30,23 @@ const methods: Method[] = [
 ];
 const CartBody = () => {
   const [subtotalPrice, setSubtotalPrice] = useState(0);
-  const { cart } = useAppContext();
+  const { cart, handleAddToCart, method, handleChangeMethod } = useAppContext();
   const [shippingPrice, setShippingPrice] = useState(0);
   const [total, setTotal] = useState(subtotalPrice + shippingPrice);
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState(-1);
+  useEffect(() => {
+    if (method) {
+      setSelected(method.id);
+      setShippingPrice(method.price);
+    }
+  }, []);
   const handleClick = (id: number, price: number) => {
-    selected != id ? setSelected(id) : setSelected(0);
+    selected != id ? setSelected(id) : setSelected(-1);
     setShippingPrice(price);
+    const method = methods[id];
+    handleChangeMethod(method);
   };
-  const handleClickStart = () => {
-    console.log(methods[selected], subtotalPrice, shippingPrice, total);
-  };
+
   useEffect(() => {
     cart.map((prod) => setSubtotalPrice(prod.price * prod.count));
   }, [cart]);
@@ -87,15 +88,15 @@ const CartBody = () => {
         <p>{ConvertToLocalePrice(total)}</p>
       </div>
       <div className="w-full flex justify-center items-center">
-        {selected && cart.length > 0 ? (
-          <div
-            onClick={handleClickStart}
-            className="w-[80%] bg-white p-4 flex justify-center text-black font-bold text-2xl rounded-md"
+        {selected !== -1 && cart.length > 0 ? (
+          <Link
+            href={"/checkout"}
+            className="w-[80%] bg-white p-4 flex justify-center items-center text-center text-black font-bold text-2xl rounded-md"
           >
             Iniciar Compra
-          </div>
+          </Link>
         ) : (
-          <div className="w-[80%] bg-zinc-800 p-4 flex justify-center text-zinc-900 font-bold text-2xl rounded-md">
+          <div className="w-[80%] bg-zinc-800 p-4 flex justify-center items-center text-center text-zinc-900 font-bold text-2xl rounded-md">
             Iniciar la compra
           </div>
         )}

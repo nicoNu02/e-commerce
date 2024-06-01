@@ -11,8 +11,6 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-
-
 model User {
   id            String   @id @default(cuid())
   name          String   @unique
@@ -22,11 +20,13 @@ model User {
   created_at    DateTime @default(now())
   cart          Cart?
   address       Address?
+  dni           String?
   first_name    String?
   middle_name   String?
   last_name     String?
   date_of_birth String?
   phone_number  String?
+  order         Order[]
 }
 
 model Image {
@@ -59,9 +59,9 @@ model Product {
 }
 
 model Color {
-  id         String  @id @default(cuid())
+  id         String   @id @default(cuid())
   name       String
-  code       String  @unique
+  code       String   @unique
   product    Product? @relation(fields: [product_id], references: [id])
   product_id String
 }
@@ -106,4 +106,29 @@ model Address {
   province     String
   city         String
   postal_code  String
+}
+
+model Order {
+  id           String  @id @default(cuid())
+  user         User?   @relation(fields: [user_id], references: [id])
+  user_id      String?
+  email        String
+  name         String
+  last_name    String
+  dni          String
+  phone_number String
+  addres_line  String
+  house_number String
+  flor         String?
+  apartment    String?
+  city         String
+  province     String
+  shipping_method  String
+  shipping_details String?
+  shipping_price   Int?
+  payment_method String
+  total_price    Int
+  notes String?
+  stage String?  @default("In process") //on the way - finished
+  paid  Boolean? @default(false)
 }

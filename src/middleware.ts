@@ -10,8 +10,13 @@ export default auth((req) => {
   const { url } = req;
   console.log(url);
   const contaisRegister = url.endsWith("/api/auth/signin");
-  if (!req.auth && !contaisRegister)
+  if (!req.auth && !contaisRegister) {
     return Response.redirect(new URL("/api/auth/signin", nextUrl));
+  }
+  const isCheckout = url.endsWith("/checkout");
+  if (isCheckout) {
+    return Response.redirect(new URL("/checkout?stage=shipping", nextUrl));
+  }
   return null;
 });
 export const config = {

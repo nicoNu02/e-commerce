@@ -1,10 +1,8 @@
 "use client";
-import { ConvertToLocalePrice } from "@/utils/convertion";
 
-export default function ShippingMethod({
+export default function PaymentMethods({
   title,
   details,
-  price,
   id,
   handleClick,
   selected,
@@ -12,21 +10,20 @@ export default function ShippingMethod({
   id: number;
   title: string;
   details: string;
-  price: number;
-  handleClick: (id: number, price: number) => void;
+  handleClick: (id: number) => void;
   selected: number;
 }) {
   return (
     <div
       className={
         selected == id
-          ? "flex bg-zinc-800 my-2 p-4 items-center rounded-md border-4 border-zinc-400 transition delay-50 ease-in"
-          : "flex bg-zinc-800 my-2 p-4 items-center rounded-md"
+          ? "flex bg-zinc-800 my-2 p-4 items-center rounded-md border-4 border-zinc-400 transition delay-50 ease-in gap-4"
+          : "flex bg-zinc-800 my-2 p-4 items-center rounded-md gap-4"
       }
     >
       <div
         className="w-8 h-8 rounded-full bg-black flex justify-center items-center mr-2 shrink-0"
-        onClick={() => handleClick(id, price)}
+        onClick={() => handleClick(id)}
       >
         <div
           className={
@@ -36,11 +33,9 @@ export default function ShippingMethod({
           }
         ></div>
       </div>
-      <div>
+      <div className="text-zinc-200">
         <h3 className="text-xl font-medium">{title}</h3>
-        <p className="text-md font-medium">
-          ${ConvertToLocalePrice(price)} - {details}
-        </p>
+        <p className="text-sm font-light">{details}</p>
       </div>
     </div>
   );

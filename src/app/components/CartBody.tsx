@@ -54,7 +54,7 @@ const CartBody = () => {
     setTotal(shippingPrice + subtotalPrice);
   }, [shippingPrice, subtotalPrice]);
   return cart.length > 0 ? (
-    <div className="w-full text-zinc-200">
+    <div className="w-full text-zinc-200 overflow-auto">
       {cart.map((prod: Cart, i: number) => {
         return <CartProductDetails prod={prod} key={i} />;
       })}

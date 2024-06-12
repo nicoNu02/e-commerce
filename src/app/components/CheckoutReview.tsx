@@ -84,6 +84,10 @@ export default function CheckoutReview() {
     )} %0AMetodo de envio: ${method}%0ANotas: ${notes}%0ATotal: $${total}`;
   };
   const handleFinish = async () => {
+    if (form === initialForm) {
+      router.push("/");
+      return;
+    }
     const bodyToSend = {
       email: form.formCheckout.shipping.email,
       name: form.formCheckout.shipping.name,
@@ -133,6 +137,7 @@ export default function CheckoutReview() {
             ConvertToLocalePrice(form.formCheckout.payment.totalPrice)
           );
         localStorage.removeItem("myData");
+        setForm(initialForm);
         router.push(`https://wa.me/543413525159?text=${textToSend}`);
       }
     } catch (error) {

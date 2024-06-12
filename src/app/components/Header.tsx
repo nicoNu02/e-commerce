@@ -13,7 +13,7 @@ const Header = () => {
       <div className="hidden lg:flex justify-between gap-4 font-bold text-lg ">
         <Link href={"/"}>Inicio</Link>
         <Link href={"/products"}>Productos</Link>
-        <Link href={"/categories"}>Categorías</Link>
+        {/* <Link href={"/categories"}>Categorías</Link> */}
       </div>
       <div className="lg:hidden">
         <Menu />

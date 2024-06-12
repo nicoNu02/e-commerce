@@ -14,7 +14,7 @@ const Menu = () => {
   const paths: MenuItem[] = [
     { title: "Inicio", link: "/" },
     { title: "Productos", link: "/products" },
-    { title: "Categorias", link: "/categories" },
+    // { title: "Categorias", link: "/categories" },
   ];
   const pathname = usePathname();
   const handleClick = () => {

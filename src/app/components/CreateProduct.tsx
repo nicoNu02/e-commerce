@@ -4,6 +4,7 @@ import { PutBlobResult } from "@vercel/blob";
 import Image from "next/image";
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { deleteImageByURL } from "../../../fetchData";
+import { useRouter } from "next/navigation";
 interface Product {
   name: string | readonly string[] | number | undefined;
   description: string | readonly string[] | number | undefined;
@@ -46,6 +47,7 @@ const initialProduct: Product = {
 };
 let urlImages: string[] = [];
 export default function CreateProduct() {
+  const router = useRouter();
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [isSelected, setIsSelected] = useState(false);
   const [colorList, setColorList] = useState<Array<Color>>();
@@ -138,7 +140,9 @@ export default function CreateProduct() {
 
       setProduct(initialProduct);
       //reload page
-      window.location.reload();
+      setTimeout(() => {
+        router.refresh();
+      }, 1500);
     } else {
       alert("please select a category for the product");
     }

@@ -30,7 +30,6 @@ export default function SwiperDefault({
       </div>
       <div className="h-80 mx-2 sm:mx-16 md:mx-16 lg:mx-16 sm:h-[45vh] min-w-40">
         <Swiper
-          key={"asd"}
           className="h-full mx-32 flex items-center"
           modules={[Navigation]}
           spaceBetween={20}
@@ -71,27 +70,25 @@ export default function SwiperDefault({
             const price = ConvertToLocalePrice(key.price);
             const url = key.url;
             return (
-              <>
-                <SwiperSlide
-                  key={i}
-                  className="flex items-center justify-center"
-                >
-                  <>
-                    <div className="flex flex-col items-center justify-between w-[30vw] min-w-40 h-full border-solid border-2 rounded-xl sm:w-64">
-                      <ProductCard
-                        name={name}
-                        url={url}
-                        idx={idx}
-                        //@ts-ignore
-                        price={price}
-                      />
-                    </div>
-                  </>
-                </SwiperSlide>
-              </>
+              <SwiperSlide
+                key={key.name}
+                className="flex items-center justify-center"
+              >
+                <>
+                  <div className="flex flex-col items-center justify-between w-[30vw] min-w-40 h-full border-solid border-2 rounded-xl sm:w-64">
+                    <ProductCard
+                      name={name}
+                      url={url}
+                      idx={idx}
+                      //@ts-ignore
+                      price={price}
+                    />
+                  </div>
+                </>
+              </SwiperSlide>
             );
           })}
-          <SwiperSlide className="flex items-center justify-center">
+          <SwiperSlide className="flex items-center justify-center" key={title}>
             <Link
               href={"/products"}
               className="flex flex-col items-center justify-center w-[30vw] min-w-40 h-full border-solid border-2 rounded-xl sm:w-64"

@@ -23,11 +23,11 @@ const Modal = async ({
     cart?: string | undefined;
   };
 }) => {
-  const product: Product | null = await FetchProductById(params.productId);
-  const images: Image[] | null = await FetchImagesById(params.productId);
+  //@ts-ignore
+  const product: Product = await FetchProductById(params.productId);
+  const images: Image[] = await FetchImagesById(params.productId);
   const colors: Color[] = await FetchColorsByProductId(params.productId);
   const queryParams = searchParams;
-
   const actualImage = Number(queryParams.img);
   return (
     product && (
@@ -49,7 +49,12 @@ const Modal = async ({
             <h3 className="text-xl font-bold md:text-2xl">
               ${ConvertToLocalePrice(product.price)}
             </h3>
-            <div className="flex">
+            <p className="text-sm font-bold mt-2">Descripción</p>
+            <div className="text-sm font-medium mb-2 w-full bg-zinc-200 text-zinc-900 rounded-md p-2">
+              <p>{product.description}</p>
+            </div>
+            <p>Stock: {product.itemsLeft}</p>
+            <div className="flex gap-2">
               <ButtonColor colors={colors} />
             </div>
             <AddItemCounter />

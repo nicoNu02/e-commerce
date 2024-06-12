@@ -26,27 +26,29 @@ const initialForm = {
 const methods: Method[] = [
   {
     id: 0,
-    title: "Envio a domicilio",
+    title: "Envio a acordar con el vendedor",
     price: 990,
-    details: "3 a 5 dias habiles",
+    details: "Por el momento solo realizamos envios a Rosario y alrededores",
   },
-  {
-    id: 1,
-    title: "Envio a sucursal",
-    price: 980,
-    details: "3 a 5 dias habiles",
-  },
-  {
-    id: 2,
-    title: "Retiro en local",
-    price: 970,
-    details: "1 a 3 dias habiles",
-  },
+  // {
+  //   id: 1,
+  //   title: "Envio a sucursal",
+  //   price: 980,
+  //   details: "3 a 5 dias habiles",
+  // },
+  // {
+  //   id: 2,
+  //   title: "Retiro en local",
+  //   price: 970,
+  //   details: "1 a 3 dias habiles",
+  // },
 ];
+
 export default function CheckoutShipping() {
   const params = useSearchParams();
   const router = useRouter();
-  const { handleUpdateFormCheckout, formCheckout, handleChangeMethod, cart } =
+
+  const { handleUpdateFormCheckout, formCheckout, handleChangeMethod } =
     useAppContext();
   const [form, setForm] = useState<FormCheckout>({ shipping: initialForm });
   const [selected, setSelected] = useState(-1);
@@ -59,6 +61,9 @@ export default function CheckoutShipping() {
         setForm({ shipping: myData.formCheckout.shipping });
         setSelected(myData.formCheckout.shipping.shippingId);
       }
+    } else {
+      router.push("/");
+      return;
     }
   }, []);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -84,7 +89,14 @@ export default function CheckoutShipping() {
     } else newParams.set("stage", "shipping");
     router.push(`/checkout?${newParams.toString()}`);
     handleUpdateFormCheckout({
-      ...form,
+      ...formCheckout,
+      shipping: {
+        ...form.shipping,
+        shippingMethod: methods[selected].title,
+        shippingDetails: methods[selected].details,
+        shippingPrice: methods[selected].price,
+        shippingId: selected,
+      },
     });
   };
   const handleChangeMethodShipping = (id: number) => {

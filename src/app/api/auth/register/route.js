@@ -13,8 +13,6 @@ export async function POST(req) {
       email: data.email,
     },
   });
-  console.log(data);
-  console.log(userEmailFound, userNameFound);
   if (userNameFound)
     return NextResponse.json(
       {

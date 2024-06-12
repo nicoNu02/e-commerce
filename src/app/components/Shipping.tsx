@@ -11,9 +11,9 @@ const Shipping = async () => {
         alt="shipping"
         className="w-16"
       />
-      <h2>ENVIOS A TODO EL PAÍS</h2>
+      <h2 className="font-bold text-center">ENVIOS SOLAMENTE A ROSARIO</h2>
       <p className="text-center">
-        Através de [metodo de envio] con cualquier <br /> método de pago
+        Acordando con el vendedor cuando realices la compra de tus productos
       </p>
     </div>
   );

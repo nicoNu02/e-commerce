@@ -11,15 +11,14 @@ import ProductCard from "../components/ProductCard";
 // import { useRouter } from "next/navigation";
 import { Image, Product } from "@/types/types";
 import { ConvertToLocalePrice } from "@/utils/convertion";
+import Link from "next/link";
 
 export default function SwiperDefault({
   products,
-  images,
   title,
   description,
 }: {
   products: Product[];
-  images: Image[];
   title: string | null;
   description: string | null;
 }) {
@@ -29,17 +28,25 @@ export default function SwiperDefault({
         <h1 className="font-bold text-4xl mt-8">{title}</h1>
         <p className="w-1/2 text-center mb-4">{description}</p>
       </div>
-      <div className="h-80 mx-2 sm:mx-16 md:mx-16 lg:mx-16 sm:h-[45vh]">
+      <div className="h-80 mx-2 sm:mx-16 md:mx-16 lg:mx-16 sm:h-[45vh] min-w-40">
         <Swiper
           key={"asd"}
-          className="h-full mx-32"
+          className="h-full mx-32 flex items-center"
           modules={[Navigation]}
           spaceBetween={20}
           slidesPerView={2}
           breakpoints={{
+            300: {
+              slidesPerView: 1,
+              spaceBetween: 0,
+            },
+            390: {
+              slidesPerView: 2,
+              spaceBetween: 0,
+            },
             640: {
               slidesPerView: 2,
-              spaceBetween: 20,
+              spaceBetween: 0,
             },
             820: {
               slidesPerView: 2,
@@ -62,20 +69,38 @@ export default function SwiperDefault({
             const name = key.name;
             const idx = key.id;
             const price = ConvertToLocalePrice(key.price);
+            const url = key.url;
             return (
-              <SwiperSlide key={i} className="flex">
-                <div className="flex flex-col items-center justify-between w-[30vw] min-w-40 h-full border-solid border-2 rounded-xl sm:w-64">
-                  <ProductCard
-                    name={name}
-                    idx={idx}
-                    //@ts-ignore
-                    images={images}
-                    price={price}
-                  />
-                </div>
-              </SwiperSlide>
+              <>
+                <SwiperSlide
+                  key={i}
+                  className="flex items-center justify-center"
+                >
+                  <>
+                    <div className="flex flex-col items-center justify-between w-[30vw] min-w-40 h-full border-solid border-2 rounded-xl sm:w-64">
+                      <ProductCard
+                        name={name}
+                        url={url}
+                        idx={idx}
+                        //@ts-ignore
+                        price={price}
+                      />
+                    </div>
+                  </>
+                </SwiperSlide>
+              </>
             );
           })}
+          <SwiperSlide className="flex items-center justify-center">
+            <Link
+              href={"/products"}
+              className="flex flex-col items-center justify-center w-[30vw] min-w-40 h-full border-solid border-2 rounded-xl sm:w-64"
+            >
+              <h5 className="text-center h-12 flex flex-col items-center justify-center pt-2 px-1 font-bold text-lg">
+                Ver mas
+              </h5>
+            </Link>
+          </SwiperSlide>
         </Swiper>
       </div>
     </>

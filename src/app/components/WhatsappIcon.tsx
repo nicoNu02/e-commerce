@@ -2,9 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function WhatsappIcon() {
+
   return (
     <Link
-      href={"https://wa.me/543413525159?text=hola-nico"}
+      href={"https://wa.me/543413525159?text=*hola*%0Anico"}
       className="fixed bottom-10 right-10 z-[30]"
       target="_blank"
     >

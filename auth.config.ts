@@ -19,6 +19,7 @@ export default {
           placeholder: "*****",
         },
       },
+
       //@ts-ignore
       authorize: async (credentials) => {
         const userFound = await prisma.user.findUnique({

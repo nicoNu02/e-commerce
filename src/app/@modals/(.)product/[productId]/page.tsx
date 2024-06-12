@@ -1,5 +1,3 @@
-import AddItemCounter from "@/app/components/AddItemCounter";
-import ButtonSubmit from "@/app/components/ButtonSubmit";
 import Modal from "@/app/components/Modal";
 import ProductModalSkeleton from "@/app/components/ProductModalSkeleton";
 

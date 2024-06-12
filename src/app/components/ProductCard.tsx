@@ -7,22 +7,14 @@ import Link from "next/link";
 
 const ProductCard = ({
   idx,
-  images,
   name,
   price,
+  url,
 }: {
   name: string;
   idx: string;
   price: string;
-  images:
-    | [
-        {
-          id: number;
-          url: string;
-          product_id: string;
-        }
-      ]
-    | undefined[];
+  url: string | null;
 }) => {
   // Your client-side code that uses window goes here
   const getUrl = (id: string) => {
@@ -35,16 +27,14 @@ const ProductCard = ({
     }
     return "";
   };
-  const imageFound = images.find((value) => {
-    return value?.product_id == idx;
-  });
+
   return (
     <Suspense fallback={<Loading />}>
       <div className="flex flex-col items-center h-full w-full px-0 md:px-0 lg:px-0">
         <div className="w-full h-full flex justify-center p-3 relative">
           <Image
             //@ts-ignore
-            src={imageFound.url}
+            src={url}
             alt={name}
             className=" rounded-lg"
             fill

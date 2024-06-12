@@ -5,6 +5,9 @@
 .swiper-pagination-bullet {
   background-color: white !important;
 }
+.swiper-slide {
+  display: flex !important;
+}
 .qweqw {
   background-color: aliceblue;
 }

@@ -24,7 +24,6 @@ export async function POST(req: Request): Promise<NextResponse | undefined> {
   Object.values(category).forEach((val: string) => {
     if (val !== "") categoriesId.push(val);
   });
-
   try {
     // Create the product first
     const product = await prisma.product.create({
@@ -36,6 +35,7 @@ export async function POST(req: Request): Promise<NextResponse | undefined> {
         images: {
           create: url.map((imageUrl: string) => ({ url: imageUrl })),
         },
+        url: url[0],
       },
     });
 
@@ -49,7 +49,13 @@ export async function POST(req: Request): Promise<NextResponse | undefined> {
             create: {
               name: color.name,
               code: color.code,
-              product_id: product.id,
+            },
+          });
+          await prisma.colorProduct.create({
+            data: {
+              productId: product.id,
+              code: color.code,
+              name: color.name,
             },
           });
         })
@@ -73,6 +79,28 @@ export async function POST(req: Request): Promise<NextResponse | undefined> {
 }
 
 export async function GET(req: Request) {
-  const products = await prisma.product.findMany();
-  return NextResponse.json({ status: 200, body: products });
+  const { searchParams } = new URL(req.url);
+  const name = searchParams.get("name");
+  const id = searchParams.get("id");
+  if (name) {
+    const products = await prisma.product.findMany({
+      where: {
+        name: {
+          startsWith: name,
+          mode: "insensitive",
+        },
+      },
+    });
+    return NextResponse.json({ status: 200, body: products });
+  } else if (id) {
+    const products = await prisma.product.findMany({
+      where: {
+        id: id,
+      },
+    });
+    return NextResponse.json({ status: 200, body: products });
+  } else {
+    const products = await prisma.product.findMany();
+    return NextResponse.json({ status: 200, body: products });
+  }
 }

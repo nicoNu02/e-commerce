@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function CheckoutHeader({
   searchParams,
 }: {
@@ -9,13 +11,29 @@ export default function CheckoutHeader({
       <div className="w-full flex flex-col relative ">
         <div className="w-full flex mb-2">
           <div className="w-1/3 flex flex-col items-center justify-center">
-            <h2 className="text-base font-bold sm:text-2xl">Envío</h2>
+            <Link
+              href={"/checkout?stage=shipping"}
+              className="text-base font-bold sm:text-2xl"
+            >
+              Envío
+            </Link>
           </div>
           <div className="w-1/3 flex flex-col items-center justify-center">
-            <h2 className="text-base font-bold sm:text-2xl"> Pago</h2>
+            <Link
+              href={"/checkout?stage=payment"}
+              className="text-base font-bold sm:text-2xl"
+            >
+              {" "}
+              Pago
+            </Link>
           </div>
           <div className="w-1/3 flex flex-col items-center justify-center">
-            <h2 className="text-base font-bold sm:text-2xl">Revisión</h2>
+            <Link
+              href={"/checkout?stage=review"}
+              className="text-base font-bold sm:text-2xl"
+            >
+              Revisión
+            </Link>
           </div>
         </div>
         <div className="h-2 w-full overflow-hidden relative">

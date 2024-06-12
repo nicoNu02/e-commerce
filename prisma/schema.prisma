@@ -47,23 +47,26 @@ model Category {
 model Product {
   id                String            @id @default(cuid())
   name              String            @unique
+  created_at        DateTime          @default(now())
+  times_ordered     Int               @default(0)
   description       String
+  url               String?           @unique
   discount          Int?
   aditional_details String?
   images            Image[]
-  colors            Color[]
+  colors            ColorProduct[]
   price             Int
   itemsLeft         Int?
   categories        ProductCategory[]
   cartProducts      CartProduct[]
+  order_product     OrderProduct[]
 }
 
 model Color {
   id         String   @id @default(cuid())
-  name       String
+  name       String   
   code       String   @unique
-  product    Product? @relation(fields: [product_id], references: [id])
-  product_id String
+  product    ColorProduct[]
 }
 
 model ProductCategory {
@@ -109,26 +112,47 @@ model Address {
 }
 
 model Order {
-  id           String  @id @default(cuid())
-  user         User?   @relation(fields: [user_id], references: [id])
-  user_id      String?
-  email        String
-  name         String
-  last_name    String
-  dni          String
-  phone_number String
-  addres_line  String
-  house_number String
-  flor         String?
-  apartment    String?
-  city         String
-  province     String
+  id               String         @id @default(cuid())
+  user             User?          @relation(fields: [user_id], references: [id])
+  created_at       DateTime       @default(now())
+  user_id          String?
+  email            String
+  name             String
+  last_name        String
+  dni              String
+  phone_number     String
+  addres_line      String
+  house_number     String
+  flor             String?
+  apartment        String?
+  city             String
+  province         String
   shipping_method  String
   shipping_details String?
   shipping_price   Int?
-  payment_method String
-  total_price    Int
-  notes String?
-  stage String?  @default("In process") //on the way - finished
-  paid  Boolean? @default(false)
+  payment_method   String
+  order_product    OrderProduct[]
+  total_price      Int
+  notes            String?
+  stage            String?        @default("In process") //on the way - finished
+  paid             Boolean?       @default(false)
+}
+
+model OrderProduct {
+  orderId   String
+  productId String
+  quantity  Int
+  order     Order   @relation(fields: [orderId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@id([orderId, productId])
+}
+
+model ColorProduct {
+  code String
+  productId String
+  name String
+  color Color @relation(fields: [code], references: [code])
+  product Product @relation(fields: [productId], references: [id])
+  @@id([code, productId])
 }

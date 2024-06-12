@@ -8,21 +8,14 @@ export default function LayoutDefault({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  if (pathname == "/checkout") {
-    return (
-      <div>
-        <div className="w-full bg-white border-b-2 h-32 mb-4 flex justify-center items-center">
-          <h1 className="text-2xl font-bold text-rose-400">Gift Regaleria</h1>
-        </div>
-        {children}
-      </div>
-    );
+  if (pathname == "/checkout" || pathname == "/dashboard/products") {
+    return <div>{children}</div>;
   } else if (pathname == "/upload/product" || pathname == "/upload/category") {
     return <div>{children}</div>;
   } else
     return (
-      <div className="flex flex-col">
-        <section className="relative overflow-hidden">{children}</section>
+      <div className="h-screen flex flex-col">
+        <section className="">{children}</section>
         <FooterDefault />
       </div>
     );

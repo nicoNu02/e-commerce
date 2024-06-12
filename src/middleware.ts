@@ -3,14 +3,21 @@ import authConfig from "../auth.config";
 import NextAuth from "next-auth";
 
 export const { auth } = NextAuth(authConfig);
-console.log("middleware");
 //@ts-ignore
 export default auth((req) => {
   const { nextUrl } = req;
   const { url } = req;
-  console.log(url);
-  const contaisRegister = url.endsWith("/api/auth/signin");
-  if (!req.auth && !contaisRegister) {
+  const contaisUpload = url.endsWith("/upload/product");
+  // const containstSearch = url.includes("/?search=");
+
+  // if (containstSearch) {
+  //   const endpoint = url.split("?search=")[1];
+  //   console.log(endpoint);
+  //   return NextResponse.redirect(
+  //     new URL(`/products?search=${endpoint}`, nextUrl)
+  //   );
+  // }
+  if (!req.auth && contaisUpload) {
     return Response.redirect(new URL("/api/auth/signin", nextUrl));
   }
   const isCheckout = url.endsWith("/checkout");

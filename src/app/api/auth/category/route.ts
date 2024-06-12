@@ -9,7 +9,7 @@ export async function POST(req: Request): Promise<NextResponse | undefined> {
       description: category.description,
     },
   });
-  console.log(newCategory);
+
   return NextResponse.json({ status: 200 });
 }
 

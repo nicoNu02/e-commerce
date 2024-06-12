@@ -11,36 +11,38 @@ import Link from "next/link";
 const methods: Method[] = [
   {
     id: 0,
-    title: "Envio a domicilio",
+    title: "Envio a acordar con el vendedor",
     price: 990,
-    details: "3 a 5 dias habiles",
+    details: "Por el momento solo realizamos envios a Rosario y alrededores",
   },
-  {
-    id: 1,
-    title: "Envio a sucursal",
-    price: 980,
-    details: "3 a 5 dias habiles",
-  },
-  {
-    id: 2,
-    title: "Retiro en local",
-    price: 970,
-    details: "1 a 3 dias habiles",
-  },
+  // {
+  //   id: 1,
+  //   title: "Envio a sucursal",
+  //   price: 980,
+  //   details: "3 a 5 dias habiles",
+  // },
+  // {
+  //   id: 2,
+  //   title: "Retiro en local",
+  //   price: 970,
+  //   details: "1 a 3 dias habiles",
+  // },
 ];
 const CartBody = () => {
   const [subtotalPrice, setSubtotalPrice] = useState(0);
   const { cart, handleAddToCart, method, handleChangeMethod } = useAppContext();
   const [shippingPrice, setShippingPrice] = useState(0);
   const [total, setTotal] = useState(subtotalPrice + shippingPrice);
-  const [selected, setSelected] = useState(-1);
+  const [selected, setSelected] = useState(0);
   useEffect(() => {
+    handleChangeMethod(methods[0]);
     if (method) {
       setSelected(method.id);
       setShippingPrice(method.price);
     }
   }, []);
-  const handleClick = (id: number, price: number) => {
+  const handleClick = (id: number, price: number | null) => {
+    if (!price) return;
     selected != id ? setSelected(id) : setSelected(-1);
     setShippingPrice(price);
     const method = methods[id];

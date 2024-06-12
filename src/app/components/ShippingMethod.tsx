@@ -1,5 +1,4 @@
 "use client";
-import { ConvertToLocalePrice } from "@/utils/convertion";
 
 export default function ShippingMethod({
   title,
@@ -12,8 +11,8 @@ export default function ShippingMethod({
   id: number;
   title: string;
   details: string;
-  price: number;
-  handleClick: (id: number, price: number) => void;
+  price: number | null;
+  handleClick: (id: number, price: number | null) => void;
   selected: number;
 }) {
   return (
@@ -38,8 +37,9 @@ export default function ShippingMethod({
       </div>
       <div>
         <h3 className="text-xl font-medium">{title}</h3>
-        <p className="text-md font-medium">
-          ${ConvertToLocalePrice(price)} - {details}
+        <p className="text-md font-normal">
+          {/* ${ConvertToLocalePrice(price)} - {details} */}
+          {details}
         </p>
       </div>
     </div>

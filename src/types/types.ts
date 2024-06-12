@@ -1,5 +1,6 @@
 export interface Product {
   id: string;
+  url: string | null;
   name: string;
   description: string;
   colors?: string | null;

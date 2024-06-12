@@ -8,7 +8,6 @@ import { FetchProducts, fetchCategories, fetchImages } from "../../fetchData";
 import WhatsappIcon from "./components/WhatsappIcon";
 
 export default async function Home() {
-  const images = await fetchImages();
   const products = await FetchProducts();
   const categories = await fetchCategories();
   return (
@@ -18,10 +17,9 @@ export default async function Home() {
         <WhatsappIcon />
         <Shipping />
         <SwiperDefault
-          title={"Nuevos ingresos"}
-          description={"Todo lo nuevo en nuestra tienda"}
+          title={"Productos"}
+          description={"Todo lo de nuestra tienda"}
           products={products}
-          images={images}
         />
         <SwiperCategory categories={categories} />
       </Suspense>

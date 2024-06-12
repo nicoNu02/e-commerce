@@ -113,18 +113,20 @@ export async function POST(req: Request) {
         quantity: quantity[i],
       })),
     });
-    const products = await prisma.product.updateMany({
-      data: productsId.map((product, i) => ({
+    productsId.map((product, i) => {
+      prisma.product.update({
         where: {
           id: product,
         },
-        itemsLeft: {
-          decrement: quantity[i],
+        data: {
+          itemsLeft: {
+            decrement: quantity[i],
+          },
+          times_ordered: {
+            increment: 1,
+          },
         },
-        times_ordered: {
-          increment: quantity[i],
-        },
-      })),
+      });
     });
   }
   return NextResponse.json({ status: 200, id: id });

@@ -13,8 +13,8 @@ const Menu = () => {
 
   const paths: MenuItem[] = [
     { title: "Inicio", link: "/" },
-    { title: "Productos", link: "/productos" },
-    { title: "Categorias", link: "/categorias" },
+    { title: "Productos", link: "/products" },
+    { title: "Categorias", link: "/categories" },
   ];
   const pathname = usePathname();
   const handleClick = () => {

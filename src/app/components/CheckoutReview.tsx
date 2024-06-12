@@ -2,7 +2,7 @@
 import { Cart, FormCheckout, Method } from "@/types/types";
 import { ConvertToLocalePrice } from "@/utils/convertion";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 const ImageEditSrc =
   "https://u8v8yhe8bp8fkg64.public.blob.vercel-storage.com/edit-box-line-fb0NDfs0plPIsGeACg7NFXMDCbxkTc.svg";
@@ -136,6 +136,7 @@ export default function CheckoutReview() {
         router.push(`https://wa.me/543413525159?text=${textToSend}`);
       }
     } catch (error) {
+      console.log(error);
       return new Error("Something went wrong");
     }
   };

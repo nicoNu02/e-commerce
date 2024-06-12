@@ -19,13 +19,16 @@ export default function CheckoutHeader({
             </Link>
           </div>
           <div className="w-1/3 flex flex-col items-center justify-center">
-            <Link
-              href={"/checkout?stage=payment"}
-              className="text-base font-bold sm:text-2xl"
-            >
-              {" "}
-              Pago
-            </Link>
+            {stage !== "shipping" ? (
+              <Link
+                href={"/checkout?stage=payment"}
+                className="text-base font-bold sm:text-2xl"
+              >
+                Pago
+              </Link>
+            ) : (
+              <div className="text-base font-bold sm:text-2xl">Pago</div>
+            )}
           </div>
           <div className="w-1/3 flex flex-col items-center justify-center">
             <Link

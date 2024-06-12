@@ -2,7 +2,7 @@
 import { Cart, FormCheckout, Method } from "@/types/types";
 import { ConvertToLocalePrice } from "@/utils/convertion";
 import Image from "next/image";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 const ImageEditSrc =
   "https://u8v8yhe8bp8fkg64.public.blob.vercel-storage.com/edit-box-line-fb0NDfs0plPIsGeACg7NFXMDCbxkTc.svg";

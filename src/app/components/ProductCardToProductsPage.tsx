@@ -30,8 +30,8 @@ export default function ProductCardToProductsPage({
 
   return (
     <Suspense fallback={<Loading />}>
-      <div className="flex flex-col items-center h-full w-full px-0 md:px-0 lg:px-0">
-        <div className="w-full h-full flex justify-center p-3 relative">
+      <div className="flex flex-col items-center h-48 w-full px-0 md:px-0 lg:px-0">
+        <div className="w-full h-48 flex justify-center p-3 relative">
           <Image
             //@ts-ignore
             src={url}

@@ -13,9 +13,9 @@ export default async function Productos() {
       <Header />
       <div className="w-full h-full flex flex-col p-8">
         <h1 className="text-xl font-bold">Productos</h1>
-        <div className="w-full h-full grid grid-cols-3 gap-2">
+        <div className="w-full h-full grid grid-cols-2 gap-2 mt-4 ">
           {products.map((product, i) => (
-            <div key={i}>
+            <div key={i} className="w-full h-full">
               <ProductCardToProductsPage
                 idx={product.id}
                 name={product.name}

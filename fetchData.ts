@@ -2,9 +2,7 @@ import prisma from "@/libs/db";
 import { equal } from "assert";
 
 export const FetchProducts = async () => {
-  const products = await prisma.product.findMany({
-    take: 10,
-  });
+  const products = await prisma.product.findMany({});
 
   return products;
 };

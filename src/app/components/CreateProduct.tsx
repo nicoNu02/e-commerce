@@ -138,7 +138,6 @@ export default function CreateProduct() {
         body: JSON.stringify({ product, color }),
       });
 
-      setProduct(initialProduct);
       //reload page
       setTimeout(() => {
         router.refresh();

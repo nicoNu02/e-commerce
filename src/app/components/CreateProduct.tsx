@@ -143,6 +143,10 @@ export default function CreateProduct() {
       setColor([]);
       setUrl([]);
       urlImages = [];
+      if (inputFileRef.current?.value) {
+        inputFileRef.current.value = "";
+        setIsSelected(false);
+      }
     } else {
       alert("please select a category for the product");
     }

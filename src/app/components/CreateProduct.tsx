@@ -139,9 +139,10 @@ export default function CreateProduct() {
       });
 
       //reload page
-      setTimeout(() => {
-        router.refresh();
-      }, 1500);
+      setProduct(initialProduct);
+      setColor([]);
+      setUrl([]);
+      urlImages = [];
     } else {
       alert("please select a category for the product");
     }
@@ -279,6 +280,7 @@ export default function CreateProduct() {
           id="name"
           className="w-full border rounded-lg px-2 py-1"
           onChange={(e) => handleChangeProduct(e)}
+          value={product.name}
           required
         />
         <label htmlFor="description" className="text-md font-bold">
@@ -291,6 +293,7 @@ export default function CreateProduct() {
           className="w-full border rounded-lg px-2 py-1"
           onChange={(e) => handleChangeProduct(e)}
           required
+          value={product.description}
         />
         <label htmlFor="price" className="text-md font-bold">
           Precio
@@ -302,6 +305,7 @@ export default function CreateProduct() {
           className="w-full border rounded-lg px-2 py-1"
           onChange={(e) => handleChangeProduct(e)}
           required
+          value={product.price}
         />
         <label htmlFor="stock" className="text-md font-bold">
           Stock
@@ -313,6 +317,7 @@ export default function CreateProduct() {
           className="w-full border rounded-lg px-2 py-1"
           onChange={(e) => handleChangeProduct(e)}
           required
+          value={product.itemsLeft}
         />
         <h2 className="font-bold text-md">Color/es</h2>
         <div className="w-full bg-zinc-200 rounded-lg p-2 flex flex-col">

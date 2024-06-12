@@ -2,6 +2,7 @@
 import { Cart, FormCheckout, Method } from "@/types/types";
 import { ConvertToLocalePrice } from "@/utils/convertion";
 import Image from "next/image";
+import { useAppContext } from "../contexts";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 const ImageEditSrc =
@@ -50,6 +51,7 @@ const initialForm = {
 };
 export default function CheckoutReview() {
   const [form, setForm] = useState<Form>(initialForm);
+  const { setCart } = useAppContext();
   const router = useRouter();
   useEffect(() => {
     const data = localStorage.getItem("myData");
@@ -84,10 +86,6 @@ export default function CheckoutReview() {
     )} %0AMetodo de envio: ${method}%0ANotas: ${notes}%0ATotal: $${total}`;
   };
   const handleFinish = async () => {
-    if (form === initialForm) {
-      router.push("/");
-      return;
-    }
     const bodyToSend = {
       email: form.formCheckout.shipping.email,
       name: form.formCheckout.shipping.name,
@@ -137,8 +135,11 @@ export default function CheckoutReview() {
             ConvertToLocalePrice(form.formCheckout.payment.totalPrice)
           );
         localStorage.removeItem("myData");
-        setForm(initialForm);
-        router.push(`https://wa.me/543413525159?text=${textToSend}`);
+        window.open(`https://wa.me/543413525159?text=${textToSend}`, "_blank");
+        setTimeout(() => {
+          setCart([]);
+          router.push("/");
+        }, 1000);
       }
     } catch (error) {
       console.log(error);

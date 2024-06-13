@@ -113,21 +113,23 @@ export async function POST(req: Request) {
         quantity: quantity[i],
       })),
     });
-    productsId.map((product, i) => {
-      prisma.product.update({
-        where: {
-          id: product,
-        },
-        data: {
-          itemsLeft: {
-            decrement: quantity[i],
+    await Promise.all(
+      productsId.map(async (product, i) => {
+        await prisma.product.update({
+          where: {
+            id: product,
           },
-          times_ordered: {
-            increment: 1,
+          data: {
+            itemsLeft: {
+              decrement: quantity[i],
+            },
+            times_ordered: {
+              increment: 1,
+            },
           },
-        },
-      });
-    });
+        });
+      })
+    );
   }
   return NextResponse.json({ status: 200, id: id });
 }

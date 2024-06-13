@@ -135,7 +135,7 @@ export default function CheckoutReview() {
             ConvertToLocalePrice(form.formCheckout.payment.totalPrice)
           );
         localStorage.removeItem("myData");
-        window.open(`https://wa.me/543413525159?text=${textToSend}`, "_blank");
+        window.open(`https://wa.me/5493413765905?text=${textToSend}`, "_blank");
         setTimeout(() => {
           setCart([]);
           router.push("/");

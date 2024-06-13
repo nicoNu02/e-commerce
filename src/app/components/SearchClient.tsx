@@ -1,7 +1,7 @@
 "use client";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { FetchOrdersByName, FetchProductById } from "../../../fetchData";
+import { FetchOrdersByName } from "../../../fetchData";
 import OrderDetails from "./OrderDetails";
 
 export default function SearchClient() {
@@ -10,6 +10,10 @@ export default function SearchClient() {
   const [orderProducts, setOrderProducts] = useState([]);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
+  };
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    return;
   };
   const debounced = useDebouncedCallback((e) => {
     const fullName = e.target.value;
@@ -30,7 +34,10 @@ export default function SearchClient() {
   }, 500);
   return (
     <div className="flex flex-col p-2 rounded-lg">
-      <form className="flex flex-col rounded-lg">
+      <form
+        className="flex flex-col rounded-lg"
+        onSubmit={(e) => handleSubmit(e)}
+      >
         <label htmlFor="name">Buscar por nombre de cliente</label>
         <input
           type="text"

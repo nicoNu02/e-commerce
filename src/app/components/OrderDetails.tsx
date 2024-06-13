@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { FetchColorsByProductId } from "../../../fetchData";
 import ProductListOrder from "./ProductListOrder";
 import { ConvertToLocalePrice } from "@/utils/convertion";
 import { ClientDetails } from "./ClientDetails";

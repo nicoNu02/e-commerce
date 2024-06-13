@@ -25,6 +25,7 @@ export default function SearchProduct() {
   }, 500);
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    return;
   };
   return (
     <>

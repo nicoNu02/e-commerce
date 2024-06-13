@@ -33,7 +33,7 @@ export default function SwiperDefault({
           className="h-full mx-32 flex items-center"
           modules={[Navigation]}
           spaceBetween={20}
-          slidesPerView={2}
+          slidesPerView={1}
           breakpoints={{
             300: {
               slidesPerView: 1,

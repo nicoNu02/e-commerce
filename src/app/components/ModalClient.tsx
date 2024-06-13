@@ -9,7 +9,8 @@ const ModalClient = ({ children }: { children: React.ReactNode }) => {
   const handleBackClick = () => {
     router.push("/", { scroll: false });
   };
-  const isProductRoute = pathname.startsWith("/product/");
+  const isProductRoute =
+    pathname.startsWith("/product/") || pathname.startsWith("/products/");
 
   if (!isProductRoute) return null;
 

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { deleteImageByURL } from "../../../fetchData";
 import { useRouter } from "next/navigation";
+import { useProductsAndCategories } from "../hooks/useFetchData";
 interface Product {
   name: string | readonly string[] | number | undefined;
   description: string | readonly string[] | number | undefined;
@@ -62,6 +63,7 @@ export default function CreateProduct() {
     name: "",
     code: "",
   });
+  const { refetch } = useProductsAndCategories();
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -84,6 +86,7 @@ export default function CreateProduct() {
       UploadImage(file);
     });
     setProduct({ ...product, url: urlImages });
+    refetch();
   };
   const handleColorPickerDelete = (col: Color) => {
     setProductColors([...productColors.filter((color) => color !== col)]);

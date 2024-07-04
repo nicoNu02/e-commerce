@@ -1,9 +1,9 @@
 import prisma from "@/libs/db";
-import { equal } from "assert";
 
 export const FetchProducts = async () => {
-  const products = await prisma.product.findMany({});
-
+  const products = await fetch(process.env.URL + "/api/auth/product")
+    .then((res) => res.json())
+    .then((res) => res.body);
   return products;
 };
 
@@ -27,7 +27,9 @@ export const deleteImageByURL = async (url: string) => {
   return deleted;
 };
 export const fetchCategories = async () => {
-  const categories = await prisma.category.findMany();
+  const categories = await fetch(process.env.URL + "/api/auth/category")
+    .then((res) => res.json())
+    .then((res) => res.body);
   return categories;
 };
 

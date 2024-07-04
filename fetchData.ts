@@ -29,7 +29,9 @@ export const deleteImageByURL = async (url: string) => {
   return deleted;
 };
 export const fetchCategories = async () => {
-  const categories = await fetch(process.env.URL + "/api/auth/category")
+  const categories = await fetch(
+    "https://giftregaleria.vercel.app/api/auth/category"
+  )
     .then((res) => res.json())
     .then((res) => res.body);
   return categories;

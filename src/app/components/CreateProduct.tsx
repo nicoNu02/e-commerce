@@ -246,7 +246,7 @@ export default function CreateProduct() {
           </button>
         ) : (
           <div className="w-full p-2 rounded-lg bg-zinc-200 font-bold flex items-center justify-center">
-            Selecciona una imagen
+            Selecciona una imagen!
           </div>
         )}
       </form>

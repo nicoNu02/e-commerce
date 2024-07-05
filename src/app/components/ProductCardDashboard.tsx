@@ -8,11 +8,13 @@ export default function ProductCardDashboard({
   name,
   price,
   id,
+  fetchProducts,
 }: {
   url: string | null;
   name: string;
   price: number;
   id: string;
+  fetchProducts: () => void;
 }) {
   const [colors, setColors] = useState<any>([]);
   useEffect(() => {
@@ -30,6 +32,7 @@ export default function ProductCardDashboard({
     })
       .then((res) => res.json())
       .then((res) => res.body);
+    fetchProducts();
     console.log(response);
   };
   return (

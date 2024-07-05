@@ -56,7 +56,10 @@ export default function SearchProduct() {
             name={product.name}
             price={product.price}
             id={product.id}
-            fetchProducts={() => debounced(form.name)}
+            fetchProducts={() => {
+              setProducts([]);
+              debounced(form.name);
+            }}
           />
         ))}
       </section>

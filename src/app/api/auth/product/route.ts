@@ -110,12 +110,12 @@ export async function DELETE(req: Request) {
   const { searchParams } = new URL(req.url);
   const id = searchParams.get("id");
   try {
-    const product = await prisma.product.findUnique({
+    const images = await prisma.image.findMany({
       where: {
         id: id,
       },
     });
-    product.images.forEach(async (image) => {
+    images.map(async (image) => {
       const url = image.url;
       //delete images from blob
       const blob = await del(url, {

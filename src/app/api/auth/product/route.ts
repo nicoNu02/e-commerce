@@ -112,7 +112,7 @@ export async function DELETE(req: Request) {
   try {
     const images = await prisma.image.findMany({
       where: {
-        id: id,
+        product_id: id,
       },
     });
     images.map(async (image) => {

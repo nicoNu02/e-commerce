@@ -1,14 +1,12 @@
-import { ConvertToLocalePrice } from "@/utils/convertion";
+"use client";
 
 import { Suspense } from "react";
 import Loading from "../components/loading";
-import Header from "../components/Header";
-import { FetchProducts } from "../../../fetchData";
-import ProductCardToProductsPage from "../components/ProductCardToProductsPage";
 import ProductGrid from "../components/ProductGrid";
+import { useProductsAndCategories } from "../hooks/useFetchData";
 
-export default async function Productos() {
-  const products = await FetchProducts();
+export default function Productos() {
+  const { products } = useProductsAndCategories();
   return (
     <Suspense fallback={<Loading />}>
       <ProductGrid products={products} title="Productos" />

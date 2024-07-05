@@ -24,6 +24,14 @@ export default function ProductCardDashboard({
     };
     fetchColors();
   }, []);
+  const handleDelete = async () => {
+    const response = await fetch("/api/auth/product?id=" + id, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((res) => res.body);
+    console.log(response);
+  };
   return (
     <>
       <div className=" bg-zinc-200 rounded-lg flex flex-col items-center p-2">
@@ -54,7 +62,10 @@ export default function ProductCardDashboard({
         <button className="bg-cyan-600 text-white w-full p-2 rounded font-bold my-2">
           Editar Producto
         </button>
-        <button className="bg-red-600 text-white w-full p-2 rounded font-bold">
+        <button
+          className="bg-red-600 text-white w-full p-2 rounded font-bold"
+          onClick={handleDelete}
+        >
           Eliminar Producto
         </button>
       </div>

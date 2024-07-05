@@ -1,6 +1,7 @@
 //@ts-nocheck
 import prisma from "@/libs/db";
 import { ConvertToCents } from "@/utils/convertion";
+import { del } from "@vercel/blob";
 import { NextResponse } from "next/server";
 interface Color {
   name: string | undefined;
@@ -102,5 +103,59 @@ export async function GET(req: Request) {
   } else {
     const products = await prisma.product.findMany();
     return NextResponse.json({ status: 200, body: products });
+  }
+}
+
+export async function DELETE(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get("id");
+  try {
+    const product = await prisma.product.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    product.images.forEach(async (image) => {
+      const url = image.url;
+      //delete images from blob
+      const blob = await del(url, {
+        token: process.env.BLOB_READ_WRITE_TOKEN,
+      });
+    });
+    // Delete the product's colors
+    const deletedColor = await prisma.colorProduct.deleteMany({
+      where: {
+        productId: id,
+      },
+    });
+    // Delete the product's categories
+    const deletedCategory = await prisma.productCategory.deleteMany({
+      where: {
+        product_id: id,
+      },
+    });
+    // Delete the product's images
+    const deletedImage = await prisma.image.deleteMany({
+      where: {
+        product_id: id,
+      },
+    });
+    // Delete the product's orders
+    const deletedOrderProduct = await prisma.orderProduct.deleteMany({
+      where: {
+        productId: id,
+      },
+    });
+    // Delete the product
+    const deleted = await prisma.product.deleteMany({
+      where: {
+        id: id,
+      },
+    });
+
+    return NextResponse.json({ status: 200, body: deleted });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ status: 500, error: error.message });
   }
 }

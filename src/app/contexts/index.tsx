@@ -31,16 +31,16 @@ export default function AppContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  useEffect(() => {
-    // Load data from local storage on component mount
-    const savedData = localStorage.getItem("myData");
-    if (savedData) {
-      const data = JSON.parse(savedData);
-      setCart(data.cart);
-      setMethod(data.method);
-      setFormCheckout(data.formCheckout);
-    }
-  }, []);
+  // useEffect(() => {
+  //   // Load data from local storage on component mount
+  //   const savedData = localStorage.getItem("myData");
+  //   if (savedData) {
+  //     const data = JSON.parse(savedData);
+  //     setCart(data.cart);
+  //     setMethod(data.method);
+  //     setFormCheckout(data.formCheckout);
+  //   }
+  // }, []);
 
   const [cart, setCart] = useState<Array<Cart>>([]);
   const [method, setMethod] = useState<Method>();

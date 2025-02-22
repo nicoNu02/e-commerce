@@ -25,6 +25,7 @@ export default function SwiperDefault({
   description: string | null;
 }) {
   const { loadingGetAllProducts } = useAppSelector(({ products }) => products);
+  const productList = products?.slice(0, 4);
 
   return (
     <>
@@ -79,7 +80,7 @@ export default function SwiperDefault({
             }}
             navigation
           >
-            {products?.map((key, i) => {
+            {productList?.map((key, i) => {
               const name = key.name;
               const idx = key.id;
               const price = ConvertToLocalePrice(key.price);

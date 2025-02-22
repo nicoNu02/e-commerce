@@ -3,9 +3,9 @@
 import Image from "next/image";
 import { Suspense } from "react";
 import Loading from "./Loading";
-import Link from "next/link";
 import { useAppDispatch } from "@/libs/redux/hooks";
 import { setSelectedProduct } from "@/libs/redux/actions/products";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const ProductCard = ({
   id,
@@ -21,18 +21,17 @@ const ProductCard = ({
   url: string | null;
 }) => {
   const dispatch = useAppDispatch();
-  const getUrl = (id: string) => {
-    if (typeof window !== "undefined") {
-      const url = new URL(`/product/${id}`, window?.location.origin);
-      url.searchParams.delete("cart");
-      url.searchParams.set("modal", "open");
-      url.searchParams.set("img", "0");
-      return url;
-    }
-    return "";
-  };
+  const params = useSearchParams();
   const handleClickBuy = async () => {
     dispatch(setSelectedProduct({ id }));
+    const url = new URLSearchParams(params);
+
+    url.set("img", "0");
+    url.set("modal", "open");
+    url.delete("cart");
+    url.set("origin", "/");
+    url.set("productId", id);
+    window.history.pushState(null, "", `?${url.toString()}`);
   };
   return (
     <Suspense fallback={<Loading />}>
@@ -56,14 +55,12 @@ const ProductCard = ({
         <p className="pt-2 text-white text-xl">
           <b>${price}</b>
         </p>
-        <Link
+        <div
           onClick={handleClickBuy}
-          href={getUrl(idx)}
-          scroll={false}
-          className="bg-pink border-2 rounded-2xl hover:scale-105 transition-transform text-white w-3/4 h-8 flex items-center justify-center mb-4 mt-2"
+          className="bg-pink border-2 rounded-2xl hover:scale-105 transition-transform text-white w-3/4 h-8 flex items-center justify-center mb-4 mt-2 cursor-pointer"
         >
           Comprar
-        </Link>
+        </div>
       </div>
     </Suspense>
   );

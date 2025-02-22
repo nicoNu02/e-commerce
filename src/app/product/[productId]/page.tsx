@@ -1,22 +1,21 @@
-import Modal from "@/app/components/Modal";
-import ProductModalSkeleton from "@/app/components/ProductModalSkeleton";
-import Image from "next/image";
-import { Suspense } from "react";
+"use client";
 
-export default function ProductPage({
-  params,
-  searchParams,
-}: {
-  params: { productId: string };
-  searchParams: { img?: string; modal?: string; cart?: string };
-}) {
-  // const product = PRODUCTS[Number(params.productId)];
+import Loading from "@/app/components/Loading";
+import Modal from "@/app/components/Modal";
+
+import { useSearchParams } from "next/navigation";
+
+export default function ProductPage() {
+  const searchParams = useSearchParams();
+  console.log(searchParams);
+
   return (
     <>
-      <div className="h-lvh w-lvw bg-black">
-        <Suspense fallback={<ProductModalSkeleton />}>
-          <Modal searchParams={searchParams} params={params}></Modal>
-        </Suspense>
+      <div className="h-lvh w-lvw bg-white">
+        <div className="w-full h-full flex justify-center items-center">
+          <Loading />;
+        </div>
+        <Modal searchParams={searchParams} />
       </div>
     </>
   );

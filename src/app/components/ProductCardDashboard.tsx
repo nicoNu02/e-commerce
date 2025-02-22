@@ -33,7 +33,6 @@ export default function ProductCardDashboard({
       .then((res) => res.json())
       .then((res) => res.body);
     fetchProducts();
-    console.log(response);
   };
   return (
     <>

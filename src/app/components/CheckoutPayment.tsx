@@ -6,6 +6,8 @@ import CheckoutNextButton from "./CheckoutNextButton";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "../contexts";
+import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
+import { createOrder, orderState } from "@/libs/redux";
 
 const paymentMethods = [
   {
@@ -29,12 +31,15 @@ const sellerDetails = {
 export default function CheckoutPayment() {
   const params = useSearchParams();
   const router = useRouter();
+  const { orderForm } = useAppSelector(orderState);
+  const dispatch = useAppDispatch();
   const { cart, handleUpdateFormCheckout, formCheckout } = useAppContext();
+  console.log(cart);
   const [selected, setSelected] = useState(-1);
   const [form, setForm] = useState({
-    paymentMethod: "",
-    totalPrice: 0,
-    notes: "",
+    paymentMethod: orderForm.payment?.paymentMethod || "",
+    totalPrice: orderForm.payment?.totalPrice || 0,
+    notes: orderForm.notes || "",
   });
 
   useEffect(() => {
@@ -68,16 +73,27 @@ export default function CheckoutPayment() {
     let total = 0;
     cart.map((prod) => (total = total + prod.price * prod.count));
     setForm({ paymentMethod, totalPrice: total, notes: form.notes });
-    if (!formCheckout) return;
-    handleUpdateFormCheckout({
-      ...formCheckout,
-      payment: {
-        ...formCheckout.payment,
-        paymentMethod: paymentMethod,
-        totalPrice: total,
-      },
-      notes: form.notes,
-    });
+    if (!form) return;
+    // handleUpdateFormCheckout({
+    //   ...formCheckout,
+    //   payment: {
+    //     ...formCheckout.payment,
+    //     paymentMethod: paymentMethod,
+    //     totalPrice: total,
+    //   },
+    //   notes: form.notes,
+    // });
+
+    dispatch(
+      createOrder({
+        ...orderForm,
+        payment: {
+          paymentMethod: paymentMethod,
+          totalPrice: total,
+        },
+        notes: form.notes,
+      })
+    );
     const newParams = new URLSearchParams(params);
     const actualParam = newParams.get("stage");
     if (!actualParam) {
@@ -107,13 +123,13 @@ export default function CheckoutPayment() {
           />
         ))}
       </div>
-      {selected !== -1 && selected === 0 ? (
+      {selected === 0 ? (
         <div>
-          <div className="w-full flex flex-col p-4 bg-zinc-800 mt-4 rounded-lg ">
+          <div className="w-full flex flex-col p-4 bg-primary mt-4 rounded-lg ">
             <h2 className="text-xl font-bold mb-4 text-zinc-200">
               Detalles del vendedor
             </h2>
-            <div className="w-full flex flex-col bg-zinc-200 rounded-lg p-4">
+            <div className="w-full flex flex-col bg-white rounded-lg p-4">
               <h3 className="text-lg font-bold">Nombre Completo:</h3>
               <p className="text-sm font-medium">{sellerDetails.fullName}</p>
               <h3 className="text-lg font-bold">DNI:</h3>
@@ -126,7 +142,7 @@ export default function CheckoutPayment() {
           </div>
         </div>
       ) : null}
-      <div className="w-full flex flex-col p-4 bg-zinc-800 mt-4 rounded-lg">
+      <div className="w-full flex flex-col p-4 bg-primary mt-4 rounded-lg">
         <h2 className="text-2xl font-bold mt-4 text-zinc-200">
           Notas del pedido
         </h2>
@@ -134,7 +150,7 @@ export default function CheckoutPayment() {
           placeholder="Notas adicionales (opcional)"
           name="notes"
           id="notes"
-          className="w-full h-32 border-2 border-zinc-800 rounded-lg p-4 mt-2"
+          className="w-full h-32 border-2 border-pink rounded-lg p-4 mt-2"
           onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
             handleChangeNotes(e)
           }

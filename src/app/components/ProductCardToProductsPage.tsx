@@ -4,21 +4,33 @@ import Image from "next/image";
 import Link from "next/link";
 import { useAppDispatch } from "@/libs/redux/hooks";
 import { setSelectedProduct } from "@/libs/redux/actions/products";
+import { useSearchParams } from "next/navigation";
 
 export default function ProductCardToProductsPage({
   idx,
   name,
   price,
   url,
+  origin,
 }: {
   name: string;
   idx: string;
   price: string;
   url: string | null;
+  origin: string;
 }) {
   const dispatch = useAppDispatch();
-  const handleClickBuy = () => {
+  const params = useSearchParams();
+  const handleClickBuy = async () => {
     dispatch(setSelectedProduct({ id: idx }));
+    const url = new URLSearchParams(params);
+
+    url.set("img", "0");
+    url.set("modal", "open");
+    url.delete("cart");
+    url.set("origin", origin);
+    url.set("productId", idx);
+    window.history.pushState(null, "", `?${url.toString()}`);
   };
   return (
     <Suspense fallback={<Loading />}>
@@ -43,14 +55,12 @@ export default function ProductCardToProductsPage({
         <p className="">
           <b>${price}</b>
         </p>
-        <Link
+        <div
           onClick={handleClickBuy}
-          href={"/products/" + idx + "?modal=open&img=0"}
-          scroll={false}
-          className="bg-pink border rounded-2xl text-white w-3/4 h-8 flex items-center justify-center mb-4 mt-2 font-bold text-xs sm:text-sm "
+          className="bg-pink border rounded-2xl text-white w-3/4 h-8 flex items-center justify-center mb-4 mt-2 font-bold text-xs sm:text-sm cursor-pointer"
         >
           Comprar
-        </Link>
+        </div>
       </div>
     </Suspense>
   );

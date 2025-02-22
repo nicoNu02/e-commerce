@@ -3,24 +3,26 @@
 import { ConvertToLocalePrice } from "@/utils/convertion";
 import Header from "./Header";
 import ProductCardToProductsPage from "./ProductCardToProductsPage";
-import { useAppSelector } from "@/libs/redux/hooks";
 import Loading from "./Loading";
 
 export default function ProductGrid({
   products,
   title,
+  isLoading,
+  origin,
 }: {
   products: any[];
   title: string;
+  isLoading: boolean;
+  origin: string;
 }) {
-  const { loadingGetAllProducts } = useAppSelector(({ products }) => products);
   return (
     <>
       <Header />
       <div className="w-full h-full flex flex-col p-8">
         <h1 className="text-xl font-bold mb-8">{title}</h1>
-        {loadingGetAllProducts ? (
-          <div className="flex flex-1 justify-center items-center">
+        {isLoading ? (
+          <div className="flex w-full h-full justify-center items-center">
             <Loading />
           </div>
         ) : (
@@ -32,6 +34,7 @@ export default function ProductGrid({
                   className="border w-36 border-rose-300 sm:w-48 flex flex-col gap-4 bg-primary rounded-md"
                 >
                   <ProductCardToProductsPage
+                    origin={origin}
                     idx={product.id}
                     name={product.name}
                     price={ConvertToLocalePrice(product.price)}

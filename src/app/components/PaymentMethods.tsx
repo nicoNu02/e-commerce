@@ -17,18 +17,18 @@ export default function PaymentMethods({
     <div
       className={
         selected == id
-          ? "flex bg-zinc-800 my-2 p-4 items-center rounded-md border-4 border-zinc-400 transition delay-50 ease-in gap-4"
-          : "flex bg-zinc-800 my-2 p-4 items-center rounded-md gap-4"
+          ? "flex bg-pink my-2 p-4 items-center rounded-md border-4 border-purple-400 transition delay-50 ease-in gap-4"
+          : "flex bg-pink my-2 p-4 items-center rounded-md gap-4"
       }
     >
       <div
-        className="w-8 h-8 rounded-full bg-black flex justify-center items-center mr-2 shrink-0"
+        className="w-8 h-8 rounded-full bg-white flex justify-center items-center mr-2 shrink-0"
         onClick={() => handleClick(id)}
       >
         <div
           className={
             selected == id
-              ? "w-4 h-4 opacity-100 bg-white transition delay-50 ease-in rounded-full"
+              ? "w-4 h-4 opacity-100 bg-pink transition delay-50 ease-in rounded-full"
               : "w-4 h-4 opacity-0 transition delay-50 ease-in rounded-full"
           }
         ></div>

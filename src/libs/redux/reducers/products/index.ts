@@ -1,22 +1,26 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 import {
+  fetchSelectedProduct,
   getAllProducts,
   getAllProductsByCategory,
   searchProductByName,
   setSelectedProduct,
 } from "../../actions/products";
-import { ProductType } from "@/types/types";
+import { GetProductsByCategoryResponse, ProductType } from "@/types/types";
+import { RootState } from "../../store";
 interface ProductState {
   products: ProductType[];
-  productsByCategory: ProductType[];
+  productsByCategory: GetProductsByCategoryResponse[];
   selectedProduct: ProductType | null;
   productSearchResuls: ProductType[];
   loadingGetAllProducts: boolean;
   loadingGetAllProductsCategory: boolean;
   loadingSearchProducts: boolean;
+  loadingFetchSelectedProduct: boolean;
   errorGetAllProducts: string | null;
   errorGetAllProductsCategory: string | null;
   errorSearchProducts: string | null;
+  errorFetchSelectedProduct: string | null;
 }
 const initialState: ProductState = {
   products: [],
@@ -26,9 +30,11 @@ const initialState: ProductState = {
   loadingGetAllProducts: false,
   loadingSearchProducts: false,
   loadingGetAllProductsCategory: false,
+  loadingFetchSelectedProduct: false,
   errorGetAllProducts: null,
   errorGetAllProductsCategory: null,
   errorSearchProducts: null,
+  errorFetchSelectedProduct: null,
 };
 
 const productsSlice = createSlice({
@@ -41,7 +47,6 @@ const productsSlice = createSlice({
         state.loadingGetAllProducts = true;
       })
       .addCase(getAllProducts.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.loadingGetAllProducts = false;
 
         state.products = action.payload;
@@ -79,13 +84,31 @@ const productsSlice = createSlice({
         state.loadingSearchProducts = false;
       })
       .addCase(setSelectedProduct, (state, action) => {
-        console.log(action.payload);
+        console.log(action.payload, "AAAAAAAAAAAAAAAA");
+        console.log(current(state.products), "EEEEEEEEEEEEEEEEEE");
+
         const prod = state.products.find(
           (product) => product.id === action.payload
         );
+        console.log(current(state.products), "AAAAAAAAAAAAAAAA");
+        console.log(prod, "BBBBBBBBBBBBBBBBBB");
         state.selectedProduct = prod ?? null;
+      })
+      .addCase(fetchSelectedProduct.pending, (state) => {
+        state.selectedProduct = null;
+        state.loadingFetchSelectedProduct = true;
+      })
+      .addCase(fetchSelectedProduct.fulfilled, (state, action) => {
+        state.selectedProduct = action.payload;
+        console.log(action.payload, "AAAAAAAAAAAAAAAAAAAAAAAA");
+        state.loadingFetchSelectedProduct = false;
+      })
+      .addCase(fetchSelectedProduct.rejected, (state, action) => {
+        state.errorFetchSelectedProduct =
+          action.error.message ?? "Unknown error";
       });
   },
 });
+export const productState = (state: RootState) => state.products;
 
 export default productsSlice.reducer;

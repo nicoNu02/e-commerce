@@ -15,7 +15,7 @@ export default function LayoutDefault({
   } else
     return (
       <div className="h-screen flex flex-col">
-        <section className="">{children}</section>
+        <section className="flex-1">{children}</section>
         <FooterDefault />
       </div>
     );

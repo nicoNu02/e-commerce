@@ -1,8 +1,15 @@
-import { Product, Image, Color } from "@prisma/client";
+import { Product, Image, Color, Category } from "@prisma/client";
 
 export interface ProductType extends Product {
   images: Image[];
   colors: Color[];
+}
+
+export interface GetProductsByCategoryResponse {
+  category: Category;
+  category_id: string;
+  product: ProductType;
+  product_id: string;
 }
 export interface ImageType {
   id: string;
@@ -22,15 +29,11 @@ export interface Method {
   details: string;
   price: number;
 }
-export interface Cart {
-  id: string;
+export interface Cart extends Product {
+  image: Image;
+  color: Color;
   count: number;
-  name: string;
-  color: string;
-  price: number;
-  url: string;
 }
-
 export interface FormCheckout {
   shipping: {
     email: string;

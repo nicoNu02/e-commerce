@@ -83,7 +83,20 @@ export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const name = searchParams.get("name");
   const id = searchParams.get("id");
-  if (name) {
+  const category = searchParams.get("category");
+
+  if (category) {
+    const products = await prisma.productCategory.findMany({
+      where: {
+        category_id: category,
+      },
+      include: {
+        product: { include: { images: true, colors: true } },
+        category: true,
+      },
+    });
+    return NextResponse.json({ status: 200, body: products });
+  } else if (name) {
     const products = await prisma.product.findMany({
       where: {
         name: {
@@ -91,6 +104,7 @@ export async function GET(req: Request) {
           mode: "insensitive",
         },
       },
+      include: { images: true, colors: true },
     });
     return NextResponse.json({ status: 200, body: products });
   } else if (id) {
@@ -98,10 +112,13 @@ export async function GET(req: Request) {
       where: {
         id: id,
       },
+      include: { images: true, colors: true },
     });
     return NextResponse.json({ status: 200, body: products });
   } else {
-    const products = await prisma.product.findMany();
+    const products = await prisma.product.findMany({
+      include: { images: true, colors: true },
+    });
     return NextResponse.json({ status: 200, body: products });
   }
 }

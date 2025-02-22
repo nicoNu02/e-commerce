@@ -2,7 +2,7 @@ import CheckoutHeader from "../components/CheckoutHeader";
 import CheckoutPayment from "../components/CheckoutPayment";
 import CheckoutReview from "../components/CheckoutReview";
 import CheckoutShipping from "../components/CheckoutShipping";
-import { useAppContext } from "../contexts";
+import Header from "../components/Header";
 
 export default function Checkout({
   searchParams,
@@ -12,9 +12,9 @@ export default function Checkout({
   let stage = searchParams?.stage;
   return (
     <>
-      <div className="w-full bg-white border-b-2 h-32 mb-4 flex justify-center items-center">
-        <h1 className="text-2xl font-bold text-rose-400">Gift Regaleria</h1>
-      </div>
+      {/* Divider */}
+      <Header />
+      <div className="h-1 bg-pink"></div>
       <div className="p-4">
         <CheckoutHeader searchParams={searchParams} />
         {!stage ? (

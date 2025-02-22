@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Category, Order } from "@prisma/client";
 import { getAllCategories } from "../../actions/categories";
+import { RootState } from "../../store";
 interface CategoriesState {
   categories: Category[];
   loading: boolean;
@@ -22,7 +23,6 @@ const categoriesSlice = createSlice({
         state.loading = true;
       })
       .addCase(getAllCategories.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.categories = action.payload;
       })
       .addCase(getAllCategories.rejected, (state, action) => {
@@ -30,5 +30,6 @@ const categoriesSlice = createSlice({
       });
   },
 });
+export const categoryState = (state: RootState) => state.categories;
 
 export default categoriesSlice.reducer;

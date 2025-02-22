@@ -1,13 +1,14 @@
 "use client";
 import Image from "next/image";
-import { useAppContext } from "../contexts";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import CartModal from "./CartModal";
+import { useAppSelector } from "@/libs/redux/hooks";
+import { orderState } from "@/libs/redux";
 
 const CartIcon = () => {
   const [open, setOpen] = useState(false);
-  const { cart } = useAppContext();
+  const { cart } = useAppSelector(orderState);
   const params = useSearchParams();
   const path = usePathname();
   const cartItems = cart.length;

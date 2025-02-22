@@ -1,5 +1,5 @@
 import { apiService } from "@/axios";
-import { ProductType } from "@/types/types";
+import { GetProductsByCategoryResponse, ProductType } from "@/types/types";
 import { Product } from "@prisma/client";
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -21,7 +21,7 @@ export const getAllProducts = createAsyncThunk<
 });
 
 export const getAllProductsByCategory = createAsyncThunk<
-  ProductType[],
+  GetProductsByCategoryResponse[],
   { categoryId: string },
   { rejectValue: { message: string } }
 >(
@@ -29,6 +29,7 @@ export const getAllProductsByCategory = createAsyncThunk<
   async ({ categoryId }, { rejectWithValue }) => {
     try {
       const response = await apiService.get(`/product?category=${categoryId}`);
+      console.log(response.data.body, "AAAAAAAAAAAAAAAAAAAAAAAA");
       return response.data.body;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -38,6 +39,22 @@ export const getAllProductsByCategory = createAsyncThunk<
     }
   }
 );
+
+export const fetchSelectedProduct = createAsyncThunk<
+  ProductType,
+  { id: string },
+  { rejectValue: { message: string } }
+>("products/fetchSelectedProduct", async ({ id }, { rejectWithValue }) => {
+  try {
+    const response = await apiService.get(`/product?id=${id}`);
+    return response.data.body[0];
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return rejectWithValue({ message: "Error loading areas" });
+    }
+    throw error;
+  }
+});
 
 export const setSelectedProduct = createAction(
   "products/setSelectedProduct",

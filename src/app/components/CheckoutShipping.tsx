@@ -4,8 +4,9 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import CheckoutNextButton from "./CheckoutNextButton";
 import ShippingMethod from "./ShippingMethod";
 import { FormCheckout, Method } from "@/types/types";
-import { useAppContext } from "../contexts";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
+import { createOrder, orderState, setMethod } from "@/libs/redux";
 const initialForm = {
   email: "",
   name: "",
@@ -30,27 +31,29 @@ const methods: Method[] = [
     price: 990,
     details: "Por el momento solo realizamos envios a Rosario y alrededores",
   },
-  // {
-  //   id: 1,
-  //   title: "Envio a sucursal",
-  //   price: 980,
-  //   details: "3 a 5 dias habiles",
-  // },
-  // {
-  //   id: 2,
-  //   title: "Retiro en local",
-  //   price: 970,
-  //   details: "1 a 3 dias habiles",
-  // },
+  {
+    id: 1,
+    title: "Envio a sucursal",
+    price: 980,
+    details: "3 a 5 dias habiles",
+  },
+  {
+    id: 2,
+    title: "Retiro en local",
+    price: 970,
+    details: "1 a 3 dias habiles",
+  },
 ];
 
 export default function CheckoutShipping() {
   const params = useSearchParams();
   const router = useRouter();
+  const { orderForm } = useAppSelector(orderState);
+  const dispatch = useAppDispatch();
 
-  const { handleUpdateFormCheckout, formCheckout, handleChangeMethod } =
-    useAppContext();
-  const [form, setForm] = useState<FormCheckout>({ shipping: initialForm });
+  const [form, setForm] = useState<FormCheckout>({
+    shipping: orderForm.shipping,
+  });
   const [selected, setSelected] = useState(-1);
   useEffect(() => {
     const data = localStorage.getItem("myData");
@@ -88,37 +91,30 @@ export default function CheckoutShipping() {
       newParams.set("stage", "review");
     } else newParams.set("stage", "shipping");
     router.push(`/checkout?${newParams.toString()}`);
-    handleUpdateFormCheckout({
-      ...formCheckout,
-      shipping: {
-        ...form.shipping,
-        shippingMethod: methods[selected].title,
-        shippingDetails: methods[selected].details,
-        shippingPrice: methods[selected].price,
-        shippingId: selected,
-      },
-    });
+
+    dispatch(
+      createOrder({
+        ...form,
+        shipping: {
+          ...form.shipping,
+          shippingMethod: methods[selected].title,
+          shippingDetails: methods[selected].details,
+          shippingPrice: methods[selected].price,
+          shippingId: selected,
+        },
+      })
+    );
   };
   const handleChangeMethodShipping = (id: number) => {
     setSelected(id);
     const method = methods[id];
-    handleChangeMethod(method);
-    setForm({
-      ...form,
-      shipping: {
-        ...form.shipping,
-        shippingMethod: method.title,
-        shippingDetails: method.details,
-        shippingPrice: method.price,
-        shippingId: id,
-      },
-    });
+    dispatch(setMethod(method));
   };
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
       <form
-        className="w-full md:w-full lg:w-10/12 flex flex-col  mt-8 bg-zinc-900 p-2 sm:p-8 rounded-md"
+        className="w-full md:w-full lg:w-10/12 flex flex-col  mt-8 bg-primary p-2 sm:p-8 rounded-md"
         onSubmit={handleSubmit}
       >
         <h2 className="text-lg sm:text-2xl  font-bold text-zinc-200 mt-2 mb-2">

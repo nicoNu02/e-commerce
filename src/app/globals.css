@@ -8,9 +8,7 @@
 .swiper-slide {
   display: flex !important;
 }
-.qweqw {
-  background-color: aliceblue;
-}
+
 .swiper-button-prev:after,
 .swiper-button-next:after {
   font-weight: 900;

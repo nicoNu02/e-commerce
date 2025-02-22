@@ -1,35 +1,35 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useAppContext } from "../contexts";
 import { useState } from "react";
 import { Image } from "@prisma/client";
-import { Product } from "@/types/types";
+import { ProductType } from "@/types/types";
+import { useAppDispatch } from "@/libs/redux/hooks";
+import { addTocart } from "@/libs/redux";
 
 const ButtonSubmit = ({
   product,
   image,
 }: {
-  product: Product;
+  product: ProductType;
   image: Image;
 }) => {
   //@ts-ignore
-  const { handleAddToCart, cart } = useAppContext();
+  const dispatch = useAppDispatch();
   const [ok, setOk] = useState<boolean | null>();
   const params = useSearchParams();
   const handleSubmit = () => {
     const color = params.get("color") || "";
     const count = Number(params.get("count")) || null;
-    if (color !== "" && count !== null) {
+    if (product.colors.length && color === "") setOk(false);
+    if (count !== null) {
       const cartProduct = {
-        id: product.id,
-        color: color,
-        count: count,
-        name: product.name,
-        price: product.price,
-        url: image.url,
+        ...product,
+        image: image,
+        color: { name: color, code: "", id: "" },
+        count,
       };
-      handleAddToCart(cartProduct);
+      dispatch(addTocart(cartProduct));
       setOk(true);
     } else setOk(false);
     setTimeout(() => {

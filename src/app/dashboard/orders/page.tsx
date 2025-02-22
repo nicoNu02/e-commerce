@@ -1,6 +1,6 @@
 import Header from "@/app/components/Header";
 import SearchClient from "@/app/components/SearchClient";
-import Loading from "@/app/components/loading";
+import Loading from "@/app/components/Loading";
 import { Suspense } from "react";
 
 export default function Orders() {

@@ -1,6 +1,6 @@
 export default function FooterDefault() {
   return (
-    <div className="flex flex-col border-t-2 p-8 mt-4 w-full mt-auto bg-white z-1">
+    <div className="flex flex-col border-t-2 p-8 w-full mt-auto bg-pink z-1 text-white">
       <h4 className="text-xl font-bold">Medios de pago</h4>
       <div></div>
       <h4 className="text-xl font-bold">Métodos de envío</h4>

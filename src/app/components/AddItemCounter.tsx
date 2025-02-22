@@ -23,7 +23,7 @@ const AddItemCounter = () => {
   return (
     <div className="flex w-full h-16 gap-2 md:w-64">
       <button
-        className={"bg-black text-white w-16 rounded font-bold"}
+        className={"bg-pink text-white w-16 rounded font-bold"}
         onClick={() => handleChange(-1)}
         type="button"
       >
@@ -33,7 +33,7 @@ const AddItemCounter = () => {
         {counter}
       </div>
       <button
-        className={"bg-black text-white w-16 rounded font-bold"}
+        className={"bg-pink text-white w-16 rounded font-bold"}
         onClick={() => handleChange(1)}
         type="button"
       >

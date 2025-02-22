@@ -20,7 +20,7 @@ export default function SwiperCategory({
         className="w-full flex flex-col justify-center items-center "
         style={{ zIndex: -1 }}
       >
-        <h1 className="font-bold text-4xl mt-8">Categorías</h1>
+        <h1 className="font-bold text-4xl mt-8 mb-2 text-pink">Categorías</h1>
         <p className="w-1/2 text-center mb-4">
           Encontrá más fácil el producto que buscás
         </p>
@@ -32,6 +32,11 @@ export default function SwiperCategory({
           modules={[Navigation]}
           spaceBetween={20}
           slidesPerView={1}
+          style={{
+            //@ts-ignore
+            "--swiper-pagination-color": "#ff66c4",
+            "--swiper-navigation-color": "#ff66c4",
+          }}
           breakpoints={{
             520: {
               slidesPerView: 1,
@@ -63,7 +68,7 @@ export default function SwiperCategory({
                       {cat.name.toUpperCase()}
                     </span>
                   </div>
-                  <div className="bg-black w-full h-16 rounded-b-xl"></div>
+                  <div className="bg-primary w-full h-16 rounded-b-xl"></div>
                 </div>
               </SwiperSlide>
             ) : null

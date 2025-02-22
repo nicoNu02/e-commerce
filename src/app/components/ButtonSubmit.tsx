@@ -41,7 +41,7 @@ const ButtonSubmit = ({
       <button
         type="button"
         onClick={handleSubmit}
-        className="bg-black text-white px-8 py-4 rounded-lg w-full md:w-1/2"
+        className="bg-pink text-white px-8 py-4 rounded-lg w-full md:w-1/2"
       >
         Agregar al Carrito
       </button>

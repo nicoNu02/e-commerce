@@ -1,18 +1,15 @@
+"use client";
+
 import React from "react";
 import ModalClient from "./ModalClient";
 import Link from "next/link";
 import AddItemCounter from "./AddItemCounter";
 import ButtonSubmit from "./ButtonSubmit";
-import {
-  FetchColorsByProductId,
-  FetchImagesById,
-  FetchProductById,
-} from "../../../fetchData";
 import ButtonChangeImage from "./ButtonChangeImage";
-import { Color, Image, Product } from "@/types/types";
 import ButtonColor from "./ButtonColor";
 import { ConvertToLocalePrice } from "@/utils/convertion";
-const ModalProductsPage = async ({
+import { useAppSelector } from "@/libs/redux/hooks";
+const ModalProductsPage = ({
   searchParams,
   params,
 }: {
@@ -23,10 +20,11 @@ const ModalProductsPage = async ({
     cart?: string | undefined;
   };
 }) => {
-  //@ts-ignore
-  const product: Product = await FetchProductById(params.productId);
-  const images: Image[] = await FetchImagesById(params.productId);
-  const colors: Color[] = await FetchColorsByProductId(params.productId);
+  const { selectedProduct: product } = useAppSelector(
+    ({ products }) => products
+  );
+  if (!product) return <></>;
+  const { images, colors } = product;
   const queryParams = searchParams;
   const actualImage = Number(queryParams.img);
   return (

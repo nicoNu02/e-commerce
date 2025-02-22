@@ -1,19 +1,16 @@
-export interface Product {
-  id: string;
-  url: string | null;
-  name: string;
-  description: string;
-  colors?: string | null;
-  price: number;
-  itemsLeft: number | null;
+import { Product, Image, Color } from "@prisma/client";
+
+export interface ProductType extends Product {
+  images: Image[];
+  colors: Color[];
 }
-export interface Image {
+export interface ImageType {
   id: string;
   url: string;
   product_id: string;
 }
 
-export interface Color {
+export interface ColorType {
   id: string;
   name: string;
   code: string;

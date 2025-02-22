@@ -1,7 +1,7 @@
 import CreateProduct from "@/app/components/CreateProduct";
 import Header from "@/app/components/Header";
 import SearchProduct from "@/app/components/SearchProduct";
-import Loading from "@/app/components/loading";
+import Loading from "@/app/components/Loading";
 import { Suspense } from "react";
 
 export default function Products() {

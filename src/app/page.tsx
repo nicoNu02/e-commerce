@@ -1,30 +1,36 @@
 "use client";
 
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import SwiperDefault from "./_swipers/swiperDefault";
-import Loading from "./components/loading";
+import Loading from "./components/Loading";
 import Header from "./components/Header";
 import Shipping from "./components/Shipping";
 import SwiperCategory from "./_swipers/swiperCategory";
-import { FetchProducts, fetchCategories, fetchImages } from "../../fetchData";
 import WhatsappIcon from "./components/WhatsappIcon";
 import { useProductsAndCategories } from "./hooks/useFetchData";
+import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
+import { getAllProducts } from "@/libs/redux/actions/products";
+import { getAllCategories } from "@/libs/redux/actions/categories";
 
 export default function Home() {
-  const { products, categories } = useProductsAndCategories();
+  const { products } = useAppSelector(({ products }) => products);
+  const { categories } = useAppSelector(({ categories }) => categories);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getAllProducts());
+    dispatch(getAllCategories());
+  }, [dispatch]);
   return (
     <>
-      <Suspense fallback={<Loading />}>
-        <Header />
-        <WhatsappIcon />
-        <Shipping />
-        <SwiperDefault
-          title={"Productos"}
-          description={"Todo lo de nuestra tienda"}
-          products={products}
-        />
-        <SwiperCategory categories={categories} />
-      </Suspense>
+      <Header />
+      <WhatsappIcon />
+      <Shipping />
+      <SwiperDefault
+        title={"Productos"}
+        description={"Todo lo de nuestra tienda"}
+        products={products}
+      />
+      <SwiperCategory categories={categories} />
     </>
   );
 }

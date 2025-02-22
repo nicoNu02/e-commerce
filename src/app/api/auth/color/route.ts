@@ -12,7 +12,7 @@ export async function GET(req: Request) {
     });
     return NextResponse.json({ body: colors });
   }
-  //@ts-ignore
+
   const colors = await prisma.color.findMany({
     select: {
       id: true,

@@ -1,6 +1,6 @@
 "use client";
 
-import { Image as ImageType, Product } from "@/types/types";
+import { ImageType, ProductType } from "@/types/types";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -10,7 +10,7 @@ export default function ButtonChangeImage({
   product,
   actualImage,
 }: {
-  product: Product;
+  product: ProductType;
   images: ImageType[];
   actualImage: number;
 }) {

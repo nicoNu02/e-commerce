@@ -1,16 +1,14 @@
 import prisma from "@/libs/db";
 
 export const FetchProducts = async () => {
-  const products = await fetch(
-    "https://giftregaleria.vercel.app/api/auth/product"
-  )
+  const products = await fetch("http://localhost:3000/api/auth/product")
     .then((res) => res.json())
     .then((res) => res.body);
   return products;
 };
 
 export const fetchImages = async () => {
-  const image = await fetch("https://giftregaleria.vercel.app/api/auth/image")
+  const image = await fetch("http://localhost:3000/api/auth/image")
     .then((res) => res.json())
     .then((res) => res.body);
 
@@ -29,9 +27,7 @@ export const deleteImageByURL = async (url: string) => {
   return deleted;
 };
 export const fetchCategories = async () => {
-  const categories = await fetch(
-    "https://giftregaleria.vercel.app/api/auth/category"
-  )
+  const categories = await fetch("http://localhost:3000/api/auth/category")
     .then((res) => res.json())
     .then((res) => res.body);
   return categories;
@@ -39,7 +35,7 @@ export const fetchCategories = async () => {
 
 export const FetchImagesById = async (idx: number | string) => {
   const image = await fetch(
-    `https://giftregaleria.vercel.app/api/auth/image?productId=${idx}`
+    `http://localhost:3000/api/auth/image?productId=${idx}`
   )
     .then((res) => res.json())
     .then((res) => res.body);
@@ -62,9 +58,7 @@ export const FetchProductByName = async (name: string) => {
 };
 
 export const FetchColorsByProductId = async (id: string) => {
-  const colors = fetch(
-    `https://giftregaleria.vercel.app/api/auth/color?productId=${id}`
-  )
+  const colors = fetch(`http://localhost:3000/api/auth/color?productId=${id}`)
     .then((res) => res.json())
     .then((res) => res.body);
   return colors;

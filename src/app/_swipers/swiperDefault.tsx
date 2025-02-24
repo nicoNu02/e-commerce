@@ -7,13 +7,11 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import ProductCard from "../components/ProductCard";
-// import { usePathname, useSearchParams } from "next/navigation";
-// import { useRouter } from "next/navigation";
 import { ProductType } from "@/types/types";
 import { ConvertToLocalePrice } from "@/utils/convertion";
 import Link from "next/link";
 import { useAppSelector } from "@/libs/redux/hooks";
-import Loading from "../components/Loading";
+import Loading from "@/app/components/Loading";
 
 export default function SwiperDefault({
   products,

@@ -3,7 +3,7 @@
 import { ConvertToLocalePrice } from "@/utils/convertion";
 import Header from "./Header";
 import ProductCardToProductsPage from "./ProductCardToProductsPage";
-import Loading from "./Loading";
+import Loading from "@/app/components/Loading";
 
 export default function ProductGrid({
   products,

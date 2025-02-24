@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Suspense } from "react";
-import Loading from "./Loading";
+import Loading from "@/app/components/Loading";
 import { useAppDispatch } from "@/libs/redux/hooks";
 import { setSelectedProduct } from "@/libs/redux/actions/products";
 import { useRouter, useSearchParams } from "next/navigation";

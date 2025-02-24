@@ -2,7 +2,7 @@
 
 import { Suspense, useEffect } from "react";
 import SwiperDefault from "./_swipers/swiperDefault";
-import Loading from "./components/Loading";
+import Loading from "@/app/components/Loading";
 import Header from "./components/Header";
 import Shipping from "./components/Shipping";
 import SwiperCategory from "./_swipers/swiperCategory";

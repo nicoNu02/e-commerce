@@ -8,9 +8,9 @@ import ButtonColor from "./ButtonColor";
 import { ConvertToLocalePrice } from "@/utils/convertion";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import { useParams } from "next/navigation";
-import { fetchSelectedProduct, setSelectedProduct } from "@/libs/redux";
+import { fetchSelectedProduct } from "@/libs/redux";
 import { CloseSVG } from "./SVG";
-import Loading from "./Loading";
+import Loading from "@/app/components/Loading";
 const Modal = ({ searchParams }: { searchParams: URLSearchParams }) => {
   const { selectedProduct: product, loadingFetchSelectedProduct } =
     useAppSelector(({ products }) => products);

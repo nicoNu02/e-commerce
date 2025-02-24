@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import Loading from "./Loading";
+import Loading from "@/app/components/Loading";
 import Image from "next/image";
 import Link from "next/link";
 import { useAppDispatch } from "@/libs/redux/hooks";

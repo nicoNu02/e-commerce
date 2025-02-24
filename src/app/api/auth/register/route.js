@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import prisma from "@/libs/db";
+
+export const runtime = "edge";
+
 export async function POST(req) {
   const data = await req.json();
   const userNameFound = await prisma.user.findUnique({

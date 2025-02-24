@@ -1,13 +1,11 @@
 "use client";
 
-import { Suspense, useEffect } from "react";
+import { useEffect } from "react";
 import SwiperDefault from "./_swipers/swiperDefault";
-import Loading from "@/app/components/Loading";
 import Header from "./components/Header";
 import Shipping from "./components/Shipping";
 import SwiperCategory from "./_swipers/swiperCategory";
 import WhatsappIcon from "./components/WhatsappIcon";
-import { useProductsAndCategories } from "./hooks/useFetchData";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import { getAllProducts } from "@/libs/redux/actions/products";
 import { getAllCategories } from "@/libs/redux/actions/categories";

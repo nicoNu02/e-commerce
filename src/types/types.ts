@@ -2,7 +2,7 @@ import { Product, Image, Color, Category } from "@prisma/client";
 
 export interface ProductType extends Product {
   images: Image[];
-  colors: Color[];
+  colors: ColorType[];
 }
 
 export interface GetProductsByCategoryResponse {

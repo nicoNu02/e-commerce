@@ -1,10 +1,10 @@
 "use client";
 
-import { Color } from "@/types/types";
+import { ColorType } from "@/types/types";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
-const ButtonColor = ({ colors }: { colors: Color[] }) => {
+const ButtonColor = ({ colors }: { colors: ColorType[] }) => {
   const params = useSearchParams();
   const [color, setColor] = useState(params.get("color") || "");
   const handleColorChange = (col: string) => {

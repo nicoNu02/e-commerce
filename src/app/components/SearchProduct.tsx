@@ -1,5 +1,5 @@
 "use client";
-import { Product } from "@/types/types";
+import { ProductType } from "@/types/types";
 import { ChangeEvent, FormEvent, useState } from "react";
 import ProductCardDashboard from "./ProductCardDashboard";
 import { useDebouncedCallback } from "use-debounce";
@@ -8,7 +8,7 @@ const initialForm = {
   name: "",
 };
 export default function SearchProduct() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<ProductType[]>([]);
   const [form, setForm] = useState(initialForm);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.value) setProducts([]);
@@ -30,17 +30,17 @@ export default function SearchProduct() {
   return (
     <>
       <form
-        className="flex flex-col p-2 rounded-lg"
+        className='flex flex-col p-2 rounded-lg'
         onSubmit={(e) => handleSubmit(e)}
       >
-        <label htmlFor="name" className="font-medium text-sm">
+        <label htmlFor='name' className='font-medium text-sm'>
           Buscar por Nombre
         </label>
         <input
-          type="text"
-          name="name"
-          id="name"
-          className="w-2/3 border rounded-lg px-2 py-1"
+          type='text'
+          name='name'
+          id='name'
+          className='w-2/3 border rounded-lg px-2 py-1'
           value={form.name}
           onChange={(e) => {
             handleChange(e);
@@ -48,7 +48,7 @@ export default function SearchProduct() {
           }}
         />
       </form>
-      <section className="grid grid-cols-2 gap-4 m-2 md:grid-cols-4 lg:grid-cols-6">
+      <section className='grid grid-cols-2 gap-4 m-2 md:grid-cols-4 lg:grid-cols-6'>
         {products.map((product, i) => (
           <ProductCardDashboard
             key={i}

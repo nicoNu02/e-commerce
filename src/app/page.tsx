@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import SwiperDefault from "./_swipers/swiperDefault";
 import Header from "./components/Header";
 import Shipping from "./components/Shipping";
@@ -12,8 +12,9 @@ import { getAllCategories } from "@/libs/redux/actions/categories";
 import { createOrder, setCart, setMethod } from "@/libs/redux";
 import Modal from "./components/Modal";
 import { useSearchParams } from "next/navigation";
+import Loading from "./components/Loading";
 
-export default function Home() {
+function HomeContent() {
   const { products } = useAppSelector(({ products }) => products);
   const { categories } = useAppSelector(({ categories }) => categories);
   const searchParams = useSearchParams();
@@ -48,3 +49,13 @@ export default function Home() {
     </>
   );
 }
+
+const Home = () => {
+  return (
+    <Suspense fallback={<Loading />}>
+      <HomeContent />
+    </Suspense>
+  );
+};
+
+export default Home;

@@ -1,31 +1,13 @@
 "use client";
 
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import Loading from "@/app/components/Loading";
-import ProductGrid from "../components/ProductGrid";
-import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
-import { getAllProducts } from "@/libs/redux/actions/products";
-import Modal from "../components/Modal";
-import { useSearchParams } from "next/navigation";
+import ProductsContent from "./ProductsContent";
 
-export default function Productos() {
-  const { products, loadingGetAllProducts } = useAppSelector(
-    ({ products }) => products
-  );
-  const dispatch = useAppDispatch();
-  const searchParams = useSearchParams();
-  useEffect(() => {
-    dispatch(getAllProducts());
-  }, [dispatch]);
+export default function Products() {
   return (
     <Suspense fallback={<Loading />}>
-      <ProductGrid
-        products={products}
-        title="Productos"
-        isLoading={loadingGetAllProducts}
-        origin="/products"
-      />
-      <Modal searchParams={searchParams} />
+      <ProductsContent />
     </Suspense>
   );
 }
